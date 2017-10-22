@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var appRoutes = require('./routes/app');
+var userRoutes = require('./routes/user');
 
 var app = express();
 mongoose.connect('mongodb://hoaiducnew:1q2w3e4r@ds125195.mlab.com:25195/mwa', {
@@ -32,6 +33,7 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use('/user', userRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler
