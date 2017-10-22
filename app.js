@@ -4,10 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 var appRoutes = require('./routes/app');
 
 var app = express();
+mongoose.connect('hoaiducnew:1q2w3e4r@ds125195.mlab.com:25195/mwa');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
