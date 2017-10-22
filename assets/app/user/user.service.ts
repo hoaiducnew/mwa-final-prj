@@ -28,9 +28,9 @@ export class UserService {
             .catch((error: Response) => Observable.throw(error.json()));
     }
 
-    // logout() {
-    //     localStorage.clear();
-    // }
+    logout() {
+        localStorage.clear();
+    }
     //
     // isLoggedIn() {
     //     return localStorage.getItem('token') !== null;
