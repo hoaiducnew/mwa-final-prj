@@ -9,7 +9,9 @@ var mongoose = require('mongoose');
 var appRoutes = require('./routes/app');
 
 var app = express();
-mongoose.connect('hoaiducnew:1q2w3e4r@ds125195.mlab.com:25195/mwa');
+mongoose.connect('mongodb://hoaiducnew:1q2w3e4r@ds125195.mlab.com:25195/mwa', {
+    useMongoClient: true
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
