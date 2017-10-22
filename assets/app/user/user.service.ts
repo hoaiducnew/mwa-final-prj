@@ -31,8 +31,8 @@ export class UserService {
     logout() {
         localStorage.clear();
     }
-    //
-    // isLoggedIn() {
-    //     return localStorage.getItem('token') !== null;
-    // }
+
+    isLoggedIn() {
+        return localStorage.getItem('token') !== null;
+    }
 }
