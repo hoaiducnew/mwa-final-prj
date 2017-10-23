@@ -1,3 +1,4 @@
+import { AuctionModule } from './auction/auction.module';
 import { BidComponent } from './bid/bid.component';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
@@ -19,8 +20,6 @@ import {ErrorComponent} from './errors/error.component';
 import {ErrorService} from './errors/error.service';
 
 
-
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -29,8 +28,7 @@ import {ErrorService} from './errors/error.service';
         LogoutComponent,
         SignupComponent,
         SigninComponent,
-        BidComponent,
-      ErrorComponent
+        ErrorComponent
 
     ],
     imports: [
@@ -38,7 +36,8 @@ import {ErrorService} from './errors/error.service';
         FormsModule,
         routing,
         ReactiveFormsModule,
-        HttpClientModule
+        HttpClientModule,
+        AuctionModule
     ],
     providers: [
         UserService, ErrorService

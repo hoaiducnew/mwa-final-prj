@@ -38,7 +38,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/auction', auctionRoutes);
+app.use('/admin/auction', auctionRoutes);
 app.use('/property', propertyRoutes);
 app.use('/user', userRoutes);
 app.use('/', appRoutes);
