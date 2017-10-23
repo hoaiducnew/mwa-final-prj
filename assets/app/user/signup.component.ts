@@ -8,17 +8,17 @@ import {User} from './user.model';
     templateUrl: './signup.component.html'
 })
 export class SignupComponent implements OnInit {
-    signUpForm: FormGroup;
+    signupForm: FormGroup;
 
     constructor(private userService: UserService) {
     }
 
     onSubmit() {
         const user = new User(
-            this.signUpForm.value.email,
-            this.signUpForm.value.password,
-            this.signUpForm.value.firstName,
-            this.signUpForm.value.lastName
+            this.signupForm.value.email,
+            this.signupForm.value.password,
+            this.signupForm.value.firstName,
+            this.signupForm.value.lastName
         );
 
         this.userService.signup(user).subscribe(
@@ -26,11 +26,11 @@ export class SignupComponent implements OnInit {
             error => console.error(error)
         );
 
-        this.signUpForm.reset();
+        this.signupForm.reset();
     }
 
     ngOnInit() {
-        this.signUpForm = new FormGroup({
+        this.signupForm = new FormGroup({
             firstName: new FormControl(null, Validators.required),
             lastName: new FormControl(null, Validators.required),
             email: new FormControl(null, [

@@ -13,6 +13,9 @@ var app = express();
 mongoose.connect('mongodb://hoaiducnew:1q2w3e4r@ds125195.mlab.com:25195/mwa', {
     useMongoClient: true
 });
+// mongoose.connect('mongodb://localhost:27017/node-angular', {
+//     useMongoClient: true
+// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

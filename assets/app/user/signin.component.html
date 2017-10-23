@@ -1,5 +1,5 @@
 <div class="col-md-8 col-md-offset-2">
-    <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="email">Mail</label>
             <input
@@ -19,6 +19,6 @@
         <button
                 class="btn btn-primary"
                 type="submit"
-                [disabled]="!signInForm.valid">Submit</button>
+                [disabled]="!signinForm.valid">Submit</button>
     </form>
 </div>

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from './user.model';
 import {UserService} from './user.service';
@@ -8,28 +8,29 @@ import {Router} from '@angular/router';
     selector: 'app-signin',
     templateUrl: './signin.component.html'
 })
-export class SigninComponent {
-    signInForm: FormGroup;
+export class SigninComponent implements OnInit {
+    signinForm: FormGroup;
 
     constructor(private userService: UserService,
                 private router: Router) {
     }
 
     onSubmit() {
-        const user = new User(this.signInForm.value.email, this.signInForm.value.password);
+        const user = new User(this.signinForm.value.email, this.signinForm.value.password);
         this.userService.signin(user).subscribe(
             data => {
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('userId', data.userId);
+                console.log(data);
+                localStorage.setItem('token', data['token']);
+                localStorage.setItem('userId', data['userId']);
                 this.router.navigateByUrl('/');
             },
             error => console.error(error)
         );
-        this.signInForm.reset();
+        this.signinForm.reset();
     }
 
     ngOnInit() {
-        this.signInForm = new FormGroup({
+        this.signinForm = new FormGroup({
             email: new FormControl(null, [
                 Validators.required,
                 Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
