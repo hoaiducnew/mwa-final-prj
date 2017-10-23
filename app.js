@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 
 var appRoutes = require('./routes/app');
 var userRoutes = require('./routes/user');
+var propertyRoutes = require('./routes/property');
 
 var app = express();
 mongoose.connect('mongodb://hoaiducnew:1q2w3e4r@ds125195.mlab.com:25195/mwa', {
@@ -36,6 +37,7 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use('/property', propertyRoutes);
 app.use('/user', userRoutes);
 app.use('/', appRoutes);
 
