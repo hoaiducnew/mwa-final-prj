@@ -1,9 +1,9 @@
-import { User } from './../user/user.model';
 
-export class Bid {
-    amount:number;
-    bidder:User;
-    time:Date;
-    property:string;
+export class Bid{
+    constructor(public property: string,
+                public bidAmount : number,
+                public bidTime: number,
+                public bidUser: string
+    ){}
 
 }
