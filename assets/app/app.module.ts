@@ -1,3 +1,4 @@
+import { BidComponent } from './bid/bid.component';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
@@ -12,6 +13,9 @@ import {SigninComponent} from './user/signin.component';
 import {HttpClientModule} from '@angular/common/http';
 import {UserService} from './user/user.service';
 
+
+
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -19,7 +23,8 @@ import {UserService} from './user/user.service';
         HeaderComponent,
         LogoutComponent,
         SignupComponent,
-        SigninComponent
+        SigninComponent,
+        BidComponent
     ],
     imports: [
         BrowserModule,
