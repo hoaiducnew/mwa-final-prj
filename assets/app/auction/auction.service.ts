@@ -1,18 +1,18 @@
 import {Injectable} from "@angular/core";
 import 'rxjs/Rx';
 
-import {Bid} from "./bid.model";
+import {Auction} from "./auction.model";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
-export class BidService {
+export class AuctionService {
     constructor(private http: HttpClient) {
     }
 
-    bidAuction(bid: Bid) {
-        const body = JSON.stringify(bid);
+    saveAuction(auction: Auction) {
+        const body = JSON.stringify(auction);
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-        return this.http.post('http://localhost:3000/bid', body, {headers: headers});
+        return this.http.post('http://localhost:3000/auction', body, {headers: headers});
      }
 }
