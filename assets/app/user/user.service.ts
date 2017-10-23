@@ -3,10 +3,11 @@ import 'rxjs/Rx';
 
 import {User} from "./user.model";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {ErrorService} from '../errors/error.service';
 
 @Injectable()
 export class UserService {
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private errorService: ErrorService) {
     }
 
     signup(user: User) {

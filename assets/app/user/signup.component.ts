@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from './user.service';
 import {User} from './user.model';
+import {ErrorService} from '../errors/error.service';
 
 @Component({
     selector: 'app-signup',
@@ -10,7 +11,8 @@ import {User} from './user.model';
 export class SignupComponent implements OnInit {
     signupForm: FormGroup;
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService,
+                private errorService: ErrorService) {
     }
 
     onSubmit() {
@@ -23,7 +25,9 @@ export class SignupComponent implements OnInit {
 
         this.userService.signup(user).subscribe(
             data => console.log(data),
-            error => console.error(error)
+            error => {
+                this.errorService.handleError(error);
+            }
         );
 
         this.signupForm.reset();

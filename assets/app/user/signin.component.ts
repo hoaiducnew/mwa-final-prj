@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from './user.model';
 import {UserService} from './user.service';
 import {Router} from '@angular/router';
+import {ErrorService} from '../errors/error.service';
 
 @Component({
     selector: 'app-signin',
@@ -12,7 +13,8 @@ export class SigninComponent implements OnInit {
     signinForm: FormGroup;
 
     constructor(private userService: UserService,
-                private router: Router) {
+                private router: Router,
+                private errorService: ErrorService) {
     }
 
     onSubmit() {
@@ -24,7 +26,9 @@ export class SigninComponent implements OnInit {
                 localStorage.setItem('userId', data['userId']);
                 this.router.navigateByUrl('/');
             },
-            error => console.error(error)
+            error => {
+                this.errorService.handleError(error);
+            }
         );
         this.signinForm.reset();
     }

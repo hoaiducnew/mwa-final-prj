@@ -4,7 +4,9 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from "./app.component";
 import {UserComponent} from './user/user.component';
+
 import {HeaderComponent} from './common/header.component';
+
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {routing} from './app.routing';
 import {LogoutComponent} from './user/logout.component';
@@ -12,6 +14,9 @@ import {SignupComponent} from './user/signup.component';
 import {SigninComponent} from './user/signin.component';
 import {HttpClientModule} from '@angular/common/http';
 import {UserService} from './user/user.service';
+import {HeaderComponent} from './header/header.component';
+import {ErrorComponent} from './errors/error.component';
+import {ErrorService} from './errors/error.service';
 
 
 
@@ -24,7 +29,9 @@ import {UserService} from './user/user.service';
         LogoutComponent,
         SignupComponent,
         SigninComponent,
-        BidComponent
+        BidComponent,
+      ErrorComponent
+
     ],
     imports: [
         BrowserModule,
@@ -34,7 +41,7 @@ import {UserService} from './user/user.service';
         HttpClientModule
     ],
     providers: [
-        UserService
+        UserService, ErrorService
     ],
     bootstrap: [AppComponent]
 })
