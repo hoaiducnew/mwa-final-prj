@@ -15,6 +15,7 @@ import {SignupComponent} from './user/signup.component';
 import {SigninComponent} from './user/signin.component';
 import {HttpClientModule} from '@angular/common/http';
 import {UserService} from './user/user.service';
+import {BidModule} from './bid/bid.module';
 
 import {ErrorComponent} from './errors/error.component';
 import {ErrorService} from './errors/error.service';
@@ -28,7 +29,9 @@ import {ErrorService} from './errors/error.service';
         LogoutComponent,
         SignupComponent,
         SigninComponent,
+
         ErrorComponent
+
 
     ],
     imports: [
@@ -37,7 +40,9 @@ import {ErrorService} from './errors/error.service';
         routing,
         ReactiveFormsModule,
         HttpClientModule,
-        AuctionModule
+        AuctionModule,
+        BidModule
+
     ],
     providers: [
         UserService, ErrorService

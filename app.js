@@ -8,8 +8,12 @@ var mongoose = require('mongoose');
 
 var appRoutes = require('./routes/app');
 var userRoutes = require('./routes/user');
+
+var bidRoutes = require('./routes/bid.js');
+
 var propertyRoutes = require('./routes/property');
 var auctionRoutes = require('./routes/auction');
+
 
 var app = express();
 mongoose.connect('mongodb://hoaiducnew:1q2w3e4r@ds125195.mlab.com:25195/mwa', {
@@ -42,7 +46,7 @@ app.use('/admin/auction', auctionRoutes);
 app.use('/property', propertyRoutes);
 app.use('/user', userRoutes);
 app.use('/', appRoutes);
-
+app.use('/bid', bidRoutes);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     return res.render('index');
