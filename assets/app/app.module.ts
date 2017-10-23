@@ -11,6 +11,7 @@ import {SignupComponent} from './user/signup.component';
 import {SigninComponent} from './user/signin.component';
 import {HttpClientModule} from '@angular/common/http';
 import {UserService} from './user/user.service';
+import {BidModule} from './bid/bid.module';
 
 @NgModule({
     declarations: [
@@ -19,14 +20,16 @@ import {UserService} from './user/user.service';
         HeaderComponent,
         LogoutComponent,
         SignupComponent,
-        SigninComponent
+        SigninComponent,
+   
     ],
     imports: [
         BrowserModule,
         FormsModule,
         routing,
         ReactiveFormsModule,
-        HttpClientModule
+        HttpClientModule,
+        BidModule
     ],
     providers: [
         UserService
