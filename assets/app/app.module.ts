@@ -1,8 +1,12 @@
+import { BidComponent } from './bid/bid.component';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from "./app.component";
 import {UserComponent} from './user/user.component';
+
+import {HeaderComponent} from './common/header.component';
+
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {routing} from './app.routing';
 import {LogoutComponent} from './user/logout.component';
@@ -14,6 +18,9 @@ import {HeaderComponent} from './header/header.component';
 import {ErrorComponent} from './errors/error.component';
 import {ErrorService} from './errors/error.service';
 
+
+
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -22,7 +29,9 @@ import {ErrorService} from './errors/error.service';
         LogoutComponent,
         SignupComponent,
         SigninComponent,
-        ErrorComponent
+        BidComponent,
+      ErrorComponent
+
     ],
     imports: [
         BrowserModule,
