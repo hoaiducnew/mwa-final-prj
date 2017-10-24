@@ -28,10 +28,9 @@ const APP_ROUTES: Routes = [
         children: PROPERTY_ROUTES
     },
     {
-        path:'bid',
-        component :BidComponent
-     }
-
+        path: 'bid',
+        component: BidComponent
+    }
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

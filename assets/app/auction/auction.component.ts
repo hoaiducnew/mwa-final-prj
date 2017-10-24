@@ -13,12 +13,12 @@ export class AuctionComponent {
         startDate:Date,
         amount:number,
         endDate:Date,
-        startingBid:number = 100,
+        startingBid:number,
         bidCount:number
     }
 
     save(){
-        this.http.post("/auction",this.auction).subscribe((data)=>console.log(data));
+        this.http.post("http://localhost:3000/admin/auction",this.auction).subscribe((data)=>console.log(data));
     }
 
 }
