@@ -17,18 +17,18 @@ router.post('/', function (req, res, next) {
 
         var property = new Property({
             name: req.body.name,
-            expectedPrice: req.body.expectedPrice,
-            facilities: req.body.facilities,
-            area: req.body.area,
-            type: req.body.type,
-            imagePath: req.body.imagePath,
-            address: {
-                address1: req.body.address.address1,
-                address2: req.body.address.address2,
-                city: req.body.address.city,
-                state: req.body.address.state,
-                zip: req.body.address.zip
-            },
+            // expectedPrice: req.body.expectedPrice,
+            // facilities: req.body.facilities,
+            // area: req.body.area,
+            // type: req.body.type,
+            // imagePath: req.body.imagePath,
+            // address: {
+            //     address1: req.body.address.address1,
+            //     address2: req.body.address.address2,
+            //     city: req.body.address.city,
+            //     state: req.body.address.state,
+            //     zip: req.body.address.zip
+            // },
             owner: user
         });
 
@@ -48,7 +48,45 @@ router.post('/', function (req, res, next) {
     });
 });
 
+router.delete('/:id', function (req, res, next) {
+    var decoded = jwt.decode(req.query.token);
+    Property.findById(req.params.id, function (err, property) {
+        console.log(property);
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        if (!property) {
+            return res.status(500).json({
+                title: 'No Property Found!',
+                error: {message: 'Property not found'}
+            });
+        }
+        if (property.owner != decoded.user._id) {
+            return res.status(401).json({
+                title: 'Not Authenticated',
+                error: {message: 'Users do not match'}
+            });
+        }
+        property.remove(function (err, result) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Deleted property',
+                obj: result
+            });
+        });
+    });
+});
+
 router.get('/', function (req, res, next) {
+    console.log('aaaa');
     Property.find()
         .exec(function (err, properties) {
             if (err) {
@@ -63,5 +101,7 @@ router.get('/', function (req, res, next) {
             });
         });
 });
+
+
 
 module.exports = router;
