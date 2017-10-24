@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var mongooseUniqueValidator = require('mongoose-unique-validator');
 var schema = new Schema({
     startTime: {type: Date, required: true},
     endTime: {type: Date, required: true},
@@ -11,5 +11,6 @@ var schema = new Schema({
     property: {type: Schema.Types.ObjectId, ref: 'Property'}
 });
 
+schema.plugin(mongooseUniqueValidator);
 
 module.exports = mongoose.model('Auction', schema);

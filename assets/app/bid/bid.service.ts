@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import 'rxjs/Rx';
 
 import {Bid} from "./bid.model";
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient,  HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class BidService {
@@ -15,4 +15,7 @@ export class BidService {
 
         return this.http.post('http://localhost:3000/bid', body, {headers: headers});
      }
+
+     
+    
 }
