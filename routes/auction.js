@@ -22,6 +22,7 @@ router.post('/', function (req, res, next) {
             startingBid: req.body.startingBid,
             currentBid: req.body.currentBid,
             status: req.body.status,
+            bidCount:req.body.bidCount,
             currentHighestBidder: req.body.bidder,
             property: req.body.property
         });
