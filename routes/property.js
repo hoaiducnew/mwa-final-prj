@@ -85,6 +85,40 @@ router.delete('/:id', function (req, res, next) {
     });
 });
 
+router.put('/:id', function (req, res, next) {
+    // var decoded = jwt.decode(req.query.token);
+    Property.findById(req.params.id, function (err, property) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        if (!property) {
+            return res.status(500).json({
+                title: 'No Property Found!',
+                error: {message: 'Property not found'}
+            });
+        }
+        // if (property.owner != decoded.user._id) {
+        //     return res.status(401).json({
+        //         title: 'Not Authenticated',
+        //         error: {message: 'Users do not match'}
+        //     });
+        // }
+        property.name = req.body.name;
+        property.save(function (err, result) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json(result);
+        });
+    });
+});
+
 router.get('/:id', function (req, res, next) {
     Property.findById(req.params.id, function (err, property) {
         if (err) {
