@@ -31,12 +31,7 @@ export class PropertyDetailComponent implements OnInit {
     }
 
     onDeleteProperty() {
-        this.propertyService.deleteProperty(this.property).subscribe(
-            (properties: Property[]) => {
-                console.log(properties);
-            }
-        );
-
+        this.propertyService.deleteProperty(this.property).subscribe();
         this.router.navigate(['/properties']);
     }
 

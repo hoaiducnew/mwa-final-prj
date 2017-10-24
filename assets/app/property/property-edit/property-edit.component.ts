@@ -40,16 +40,9 @@ export class PropertyEditComponent implements OnInit {
 
     onSubmit() {
         if (this.editMode) {
-
+            this.propertyService.updateProperty(this.id, this.propertyForm.value);
         } else {
-            this.propertyService.addProperty(this.propertyForm.value).subscribe(
-                data => {
-                    console.log(data);
-                },
-                error => {
-                    this.errorService.handleError(error);
-                }
-            )
+            this.propertyService.addProperty(this.propertyForm.value).subscribe();
         }
 
         this.router.navigate(['../'], {relativeTo: this.route});

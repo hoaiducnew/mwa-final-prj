@@ -62,6 +62,10 @@ export class PropertyService {
             ? '?token=' + localStorage.getItem('token')
             : '';
         return this.http.delete('http://localhost:3000/property/' + property._id + token)
+            .map(data => {
+                this.properties = this.properties.filter(property => property._id !== data['obj']._id);
+                this.propertiesChanged.next(this.properties.slice());
+            })
             .catch(error => {
                 this.errorService.handleError(error.error);
                 return Observable.throw(error.error);
@@ -75,62 +79,20 @@ export class PropertyService {
             ? '?token=' + localStorage.getItem('token')
             : '';
         return this.http.post('http://localhost:3000/property' + token, body, {headers: headers})
+            .map(data => {
+                this.properties.push(
+                    new Property(data['obj'].name, data['obj']._id)
+                )
+                this.propertiesChanged.next(this.properties.slice());
+            })
             .catch(error => {
                 this.errorService.handleError(error.error);
                 return Observable.throw(error.error);
             });
     }
 
-    // getMessages() {
-    //     return this.http.get('http://localhost:3000/message')
-    //         .map((response: Response) => {
-    //             const messages = response.json().obj;
-    //             let transformedMessages: Message[] = [];
-    //             for (let message of messages) {
-    //                 transformedMessages.push(new Message(
-    //                     message.content,
-    //                     message.user.firstName,
-    //                     message._id,
-    //                     message.user._id)
-    //                 );
-    //             }
-    //             this.messages = transformedMessages;
-    //             return transformedMessages;
-    //         })
-    //         .catch((error: Response) => {
-    //             this.errorService.handleError(error.json());
-    //             return Observable.throw(error.json());
-    //         });
-    // }
-    //
-    // editMessage(message: Message) {
-    //     this.messageIsEdit.emit(message);
-    // }
-    //
-    // updateMessage(message: Message) {
-    //     const body = JSON.stringify(message);
-    //     const headers = new Headers({'Content-Type': 'application/json'});
-    //     const token = localStorage.getItem('token')
-    //         ? '?token=' + localStorage.getItem('token')
-    //         : '';
-    //     return this.http.patch('http://localhost:3000/message/' + message.messageId + token, body, {headers: headers})
-    //         .map((response: Response) => response.json())
-    //         .catch((error: Response) => {
-    //             this.errorService.handleError(error.json());
-    //             return Observable.throw(error.json());
-    //         });
-    // }
-    //
-    // deleteMessage(message: Message) {
-    //     this.messages.splice(this.messages.indexOf(message), 1);
-    //     const token = localStorage.getItem('token')
-    //         ? '?token=' + localStorage.getItem('token')
-    //         : '';
-    //     return this.http.delete('http://localhost:3000/message/' + message.messageId + token)
-    //         .map((response: Response) => response.json())
-    //         .catch((error: Response) => {
-    //             this.errorService.handleError(error.json());
-    //             return Observable.throw(error.json());
-    //         });
-    // }
+    updateProperty(index: number, newProperty: Property) {
+        this.properties[index] = newProperty;
+        this.propertiesChanged.next(this.properties.slice());
+    }
 }
