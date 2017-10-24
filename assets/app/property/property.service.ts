@@ -25,32 +25,46 @@ export class PropertyService {
             : '';
         return this.http.get('http://localhost:3000/property' + token, {headers: headers})
             .map(data => {
-                this.properties = data['obj'];
-                return data['obj'];
+                let transformedProperties: Property[] = [];
+                for (let property of data['obj']) {
+                    transformedProperties.push(new Property(
+                        property.name,
+                        property._id
+                        )
+                    );
+                }
+                this.properties = transformedProperties;
+                return transformedProperties;
             })
-            .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+            .catch(error => {
+                this.errorService.handleError(error.error);
+                return Observable.throw(error.error);
             });
     }
 
     getProperty(id: string) {
         return this.properties.filter(property => property._id === id)[0];
+
+        // const headers = new HttpHeaders().set('Content-Type', 'application/json');
+        //
+        // const token = localStorage.getItem('token')
+        //     ? '?token=' + localStorage.getItem('token')
+        //     : '';
+        // return this.http.get('http://localhost:3000/property/' + id + token, {headers: headers})
+        //     .catch(error => {
+        //         this.errorService.handleError(error.error);
+        //         return Observable.throw(error.error);
+        //     });
     }
 
     deleteProperty(property: Property) {
-        const headers = new HttpHeaders().set('Content-Type', 'application/json');
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
-        return this.http.delete('http://localhost:3000/property/' + property._id + token, {headers: headers})
-            .map(data => {
-                this.properties = data['obj'];
-                return data['obj'];
-            })
-            .catch((error: Response) => {
-                this.errorService.handleError(error);
-                return Observable.throw(error);
+        return this.http.delete('http://localhost:3000/property/' + property._id + token)
+            .catch(error => {
+                this.errorService.handleError(error.error);
+                return Observable.throw(error.error);
             });
     }
 
@@ -60,21 +74,11 @@ export class PropertyService {
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
-        return this.http.post('http://localhost:3000/property' + token, body, {headers: headers});
-            // .map((response: Response) => {
-            //     const result = response.json();
-            //     const message = new Message(
-            //         result.obj.content,
-            //         result.obj.user.firstName,
-            //         result.obj._id,
-            //         result.obj.user._id);
-            //     this.messages.push(message);
-            //     return message;
-            // })
-            // .catch((error: Response) => {
-            //     this.errorService.handleError(error.json());
-            //     return Observable.throw(error.json());
-            // });
+        return this.http.post('http://localhost:3000/property' + token, body, {headers: headers})
+            .catch(error => {
+                this.errorService.handleError(error.error);
+                return Observable.throw(error.error);
+            });
     }
 
     // getMessages() {

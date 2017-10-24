@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {PropertyService} from '../property.service';
 import {ErrorService} from '../../errors/error.service';
 
@@ -15,7 +15,8 @@ export class PropertyEditComponent implements OnInit {
 
     constructor(private propertyService: PropertyService,
                 private route: ActivatedRoute,
-                private errorService: ErrorService) {}
+                private errorService: ErrorService,
+                private router: Router) {}
 
     ngOnInit() {
         this.route.params
@@ -38,13 +39,23 @@ export class PropertyEditComponent implements OnInit {
     }
 
     onSubmit() {
-        this.propertyService.addProperty(this.propertyForm.value).subscribe(
-            data => {
-                console.log(data);
-            },
-            error => {
-                this.errorService.handleError(error);
-            }
-        )
+        if (this.editMode) {
+
+        } else {
+            this.propertyService.addProperty(this.propertyForm.value).subscribe(
+                data => {
+                    console.log(data);
+                },
+                error => {
+                    this.errorService.handleError(error);
+                }
+            )
+        }
+
+        this.router.navigate(['../'], {relativeTo: this.route});
+    }
+
+    onCancel() {
+        this.router.navigate(['../'], {relativeTo: this.route});
     }
 }
