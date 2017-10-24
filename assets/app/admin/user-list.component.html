@@ -1,0 +1,22 @@
+<h1>{{title}}</h1>
+
+<table class="table">
+    <tr>
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let user of users">
+        <td>{{user.email}}</td>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>
+            <button (click)="approve(user)">Approve</button>
+        </td>
+        <td>
+            <button (click)="reject(user)">Reject</button>
+        </td>
+    </tr>
+</table>

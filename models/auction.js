@@ -7,6 +7,7 @@ var schema = new Schema({
     startingBid: {type: Number},
     currentBid: {type: Number},
     status: {type: String},  
+    bidCount:{type:Number, default:0},
     currentHighestBidder: {type: Schema.Types.ObjectId, ref: 'User'},
     property: {type: Schema.Types.ObjectId, ref: 'Property'}
 });

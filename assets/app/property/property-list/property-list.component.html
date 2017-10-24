@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-xs-12">
+        <button class="btn btn-success" (click)="onNewProperty()">New Property</button>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-xs-12">
+        <app-property-item
+                *ngFor="let property of properties"
+                [property]="property"
+                [index]="property._id"></app-property-item>
+    </div>
+</div>
+
