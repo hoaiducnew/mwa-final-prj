@@ -1,3 +1,4 @@
+import { AdminModule } from './admin/admin.module';
 import {AuctionModule} from './auction/auction.module';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
@@ -50,7 +51,8 @@ import {PropertyEditComponent} from './property/property-edit/property-edit.comp
         ReactiveFormsModule,
         HttpClientModule,
         AuctionModule,
-        BidModule
+        BidModule,
+        AdminModule
     ],
     providers: [
         UserService, ErrorService, PropertyService
