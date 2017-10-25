@@ -1,4 +1,3 @@
-
 import { Component,Input} from '@angular/core';
 import {FormControl, FormGroup, Validators,AbstractControl} from '@angular/forms';
 import {Bid} from './bid.model';
@@ -7,9 +6,6 @@ import { User } from './../user/user.model';
 import { Auction } from './../auction/auction.model';
 import {CustomValidators} from './custom-validator'
 
-
-
-
 @Component({
     selector: 'create-bid',
     templateUrl: './createbid.component.html'
@@ -17,19 +13,16 @@ import {CustomValidators} from './custom-validator'
 export class CreateBidComponent {
     createbidForm: FormGroup;
 
-
-    a:number=10;
+    @Input() auction: Auction;
    
     constructor(private bidService: BidService) {}
     
-
  
     onSubmit() {
         const bid = new Bid(
       
-
             this.createbidForm.value.bidAmount,  
-
+            this.auction
            
         );
 
@@ -44,9 +37,7 @@ export class CreateBidComponent {
 
     ngOnInit() {
         this.createbidForm = new FormGroup({
-
-            bidAmount: new FormControl('',[Validators.required,CustomValidators.rangeValidator(this.a,200)]),
-
+            bidAmount: new FormControl('',[Validators.required,CustomValidators.rangeValidator(this.auction.startingBid,this.auction.property.expectedPrice)]),
         });
     }
 
@@ -54,7 +45,8 @@ export class CreateBidComponent {
         return this.createbidForm.get('bidAmount');
     }
 
-
+    
+    
 
 }
 

@@ -2,22 +2,23 @@
     <form [formGroup]="createbidForm" (ngSubmit)="onSubmit()">
         
         <div class="form-group">
-            <label for="bidAmount">Bid Amount</label>
+                <label for="bidAmount"></label>
+
+ 
+ <label for="bidAmount"></label>
             <input
                     type="number"
                     id="bidAmount"
                     class="form-control"
-                    formControlName="bidAmount">
+                    formControlName="bidAmount" placeholder="Enter bid amount">
         </div>
-
      <div *ngIf="createbidForm.get('bidAmount').hasError('range') && createbidForm.get('bidAmount').touched"  class="alert alert-danger">
             Amount of bidding not valid
           </div> 
-
         <button
                 class="btn btn-primary"
                 type="submit"
-                [disabled]="!createbidForm.valid">Submit</button>
+                [disabled]="!createbidForm.valid">Place Bid</button>
     </form>
 </div>
 
