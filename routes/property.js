@@ -22,13 +22,11 @@ router.post('/', function (req, res, next) {
             area: req.body.area,
             type: req.body.type,
             imagePath: req.body.imagePath,
-            address: {
-                address1: req.body.address1,
-                address2: req.body.address2,
-                city: req.body.city,
-                state: req.body.state,
-                zip: req.body.zip
-            },
+            address1: req.body.address1,
+            address2: req.body.address2,
+            city: req.body.city,
+            state: req.body.state,
+            zip: req.body.zip,
             owner: user
         });
 
@@ -104,6 +102,17 @@ router.put('/:id', function (req, res, next) {
         //     });
         // }
         property.name = req.body.name;
+        property.expectedPrice = req.body.expectedPrice;
+        property.facilities = req.body.facilities;
+        property.area = req.body.area;
+        property.type = req.body.type;
+        property.imagePath = req.body.imagePath;
+        property.address1 = req.body.address1;
+        property.address2 = req.body.address2;
+        property.city = req.body.city;
+        property.state = req.body.state;
+        property.zip = req.body.zip;
+
         property.save(function (err, result) {
             if (err) {
                 return res.status(500).json({

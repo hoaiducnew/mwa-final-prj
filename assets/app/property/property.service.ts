@@ -77,10 +77,7 @@ export class PropertyService {
     updateProperty(_id: string, newProperty: Property) {
         const body = JSON.stringify(newProperty);
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
-            : '';
-        return this.http.put<Property>('http://localhost:3000/property/' + _id + token, body, {headers: headers})
+        return this.http.put<Property>('http://localhost:3000/property/' + _id, body, {headers: headers})
             .map(property => {
                 const index = this.properties.findIndex(property => property._id === _id);
                 this.properties[index] = property;
