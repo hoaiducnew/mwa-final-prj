@@ -6,7 +6,7 @@ var User = require('../models/user');
 var Property = require('../models/property');
 
 router.post('/', function (req, res, next) {
-    var decoded = jwt.decode(req.query.token);
+    var decoded = jwt.decode(req.header('token'));
     User.findById(decoded.user._id, function (err, user) {
         if (err) {
             return res.status(500).json({
@@ -17,18 +17,18 @@ router.post('/', function (req, res, next) {
 
         var property = new Property({
             name: req.body.name,
-            // expectedPrice: req.body.expectedPrice,
-            // facilities: req.body.facilities,
-            // area: req.body.area,
-            // type: req.body.type,
-            // imagePath: req.body.imagePath,
-            // address: {
-            //     address1: req.body.address.address1,
-            //     address2: req.body.address.address2,
-            //     city: req.body.address.city,
-            //     state: req.body.address.state,
-            //     zip: req.body.address.zip
-            // },
+            expectedPrice: req.body.expectedPrice,
+            facilities: req.body.facilities,
+            area: req.body.area,
+            type: req.body.type,
+            imagePath: req.body.imagePath,
+            address: {
+                address1: req.body.address1,
+                address2: req.body.address2,
+                city: req.body.city,
+                state: req.body.state,
+                zip: req.body.zip
+            },
             owner: user
         });
 
@@ -46,7 +46,7 @@ router.post('/', function (req, res, next) {
 });
 
 router.delete('/:id', function (req, res, next) {
-    // var decoded = jwt.decode(req.query.token);
+    var decoded = jwt.decode(req.header('token'));
     Property.findById(req.params.id, function (err, property) {
         console.log(property);
         if (err) {
@@ -83,7 +83,7 @@ router.delete('/:id', function (req, res, next) {
 });
 
 router.put('/:id', function (req, res, next) {
-    // var decoded = jwt.decode(req.query.token);
+    var decoded = jwt.decode(req.header('token'));
     Property.findById(req.params.id, function (err, property) {
         if (err) {
             return res.status(500).json({
@@ -117,6 +117,7 @@ router.put('/:id', function (req, res, next) {
 });
 
 router.get('/:id', function (req, res, next) {
+    var decoded = jwt.decode(req.header('token'));
     Property.findById(req.params.id, function (err, property) {
         if (err) {
             return res.status(500).json({
@@ -129,7 +130,7 @@ router.get('/:id', function (req, res, next) {
 });
 
 router.get('/', function (req, res, next) {
-    // var decoded = jwt.decode(req.header('token'));
+    var decoded = jwt.decode(req.header('token'));
     Property.find().exec(function (err, properties) {
         if (err) {
             return res.status(500).json({
