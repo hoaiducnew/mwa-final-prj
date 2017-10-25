@@ -3,6 +3,7 @@ import { Auction } from './../auction/auction.model';
 import {AuctionService} from './../auction/auction.service';
 import {Bid} from './bid.model';
 import {BidService} from './bid.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
     selector: 'auction-detail',
@@ -11,14 +12,21 @@ import {BidService} from './bid.service';
 })
 export class AuctionDetailComponent {
     auction: Auction;
+    subscription: Subscription;
 
     private bids: Bid[] = [];
 
     constructor(private auctionService: AuctionService,private bidService: BidService) {}
 
     ngOnInit() {
-      this.auction = this.auctionService.auction;     
-      
+      this.auction = this.auctionService.auction;
+
+      this.subscription = this.bidService.bidsChanged.subscribe(
+        (bids: Bid[]) => {
+            this.bids = bids;
+        }
+      );
+
       this.bidService.getBids().subscribe(
         (bids: Bid[]) => {
             this.bids = bids;

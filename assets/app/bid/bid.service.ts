@@ -8,7 +8,7 @@ import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class BidService {
-    // propertiesChanged = new Subject<Bid[]>();
+    bidsChanged = new Subject<Bid[]>();
     
     bid:Bid;
     private bids: Bid[] = [];
@@ -28,7 +28,11 @@ export class BidService {
             : '';
 
 
-        return this.http.post('http://localhost:3000/bidapi'+token, body, {headers: headers});
+        return this.http.post('http://localhost:3000/bidapi'+token, body, {headers: headers})
+            .map( data => {
+                this.bids.push(data['obj']);
+                this.bidsChanged.next(this.bids.slice());
+            });
      }
 
      getBids(){
