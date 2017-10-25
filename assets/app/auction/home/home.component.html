@@ -12,10 +12,12 @@
 
                     <div class="caption">
 
-                        <div class="addressStreet">{{auction.property.name}}</div>
+                          <h3>{{auction.property.name}} <button class="btn btn-info">View Detail</button> </h3>  
+                        <div class="well ">Auction start date : {{ auction.startTime | dateFormat}}
                         <div class="addressCityState">{{auction.property.address1}} ,{{auction.property.address2}} ,{{auction.property.city}}</div>
                         <div class="eventStatus">{{auction.property.state}} - {{auction.property.zip}}</div>
-                        <p><button class="btn btn-info">View Detail</button> </p>
+                    </div>
+                       
                     </div>
 
                 </div>
