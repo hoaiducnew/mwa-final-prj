@@ -1,3 +1,4 @@
+import { AdminModule } from './admin/admin.module';
 import {AuctionModule} from './auction/auction.module';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
@@ -52,7 +53,8 @@ import {LoggingInterceptor} from './shared/logging.interceptor';
         ReactiveFormsModule,
         HttpClientModule,
         AuctionModule,
-        BidModule
+        BidModule,
+        AdminModule
     ],
     providers: [
         UserService,

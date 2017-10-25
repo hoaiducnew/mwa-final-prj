@@ -1,0 +1,29 @@
+<div class="content-container">
+    <h1>Auctions</h1>
+    <div *ngFor="let auction of auctions" class="asset-tile">
+        <!-- <a routerLink="auction/bid/{{auction.id}}"> -->
+        <div *ngIf="auction.property != null" (click)="viewDetail(auction)">
+                
+             <!-- <a routerLink="auction/bid/{{auction.id}}"> -->
+
+                <div class="property-card-image">
+                    <img src="{{auction.property.imagePath}}" alt="{{auction.property.name}}" style="width: 100%" />
+                </div>
+                <div class="property-card-data">
+
+                    <div class="addressStreet">{{auction.property.name}}</div>
+                    <div class="addressCityState">{{auction.property.address1}},{{auction.property.address2}},{{auction.property.city}}</div>
+
+                </div>
+                <!-- <div class="property-card-footer">
+                    <div class="eventStatus">{{auction.startTime}}- {{auction.endTime}}</div>
+                </div> -->
+                <div class="property-card-footer">
+                    <div class="eventStatus">{{auction.property.state}}- {{auction.property.zip}}</div>
+                </div>
+
+
+          
+        </div>
+    </div>
+</div>
