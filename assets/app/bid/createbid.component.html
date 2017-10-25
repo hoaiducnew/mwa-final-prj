@@ -9,9 +9,11 @@
                     class="form-control"
                     formControlName="bidAmount">
         </div>
+
      <div *ngIf="createbidForm.get('bidAmount').hasError('range') && createbidForm.get('bidAmount').touched"  class="alert alert-danger">
             Amount of bidding not valid
           </div> 
+
         <button
                 class="btn btn-primary"
                 type="submit"

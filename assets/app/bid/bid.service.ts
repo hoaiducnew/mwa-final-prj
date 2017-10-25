@@ -2,7 +2,9 @@ import {Injectable} from "@angular/core";
 import {ErrorService} from '../errors/error.service';
 import {Bid} from "./bid.model";
 import {HttpClient,  HttpHeaders} from '@angular/common/http';
+
 import {Observable} from 'rxjs/Observable';
+
 
 @Injectable()
 export class BidService {
@@ -35,5 +37,4 @@ export class BidService {
     
       }
 
-      
 }

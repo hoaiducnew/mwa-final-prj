@@ -7,6 +7,7 @@ import {BidComponent} from './bid.component';
 import {CreateBidComponent} from './createbid.component';
 import {BidService} from './bid.service';
 import {ErrorService} from '../errors/error.service';
+
 @NgModule({
   declarations: [
     BidComponent,
@@ -15,9 +16,11 @@ import {ErrorService} from '../errors/error.service';
   imports: [
   BrowserModule,FormsModule,HttpModule, ReactiveFormsModule,HttpClientModule
   ],
+
   exports:[BidComponent,
     CreateBidComponent],
   providers: [BidService,ErrorService]
+
 
 })
 export class BidModule { }

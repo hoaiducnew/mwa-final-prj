@@ -5,10 +5,12 @@ import {UserComponent} from './user/user.component';
 import {BidComponent} from './bid/bid.component';
 import {USER_ROUTES} from './user/user.routes';
 
+
 import {PropertiesComponent} from './property/properties.component';
 import {PROPERTY_ROUTES} from './property/property.routes';
 
 const APP_ROUTES: Routes = [
+
 
     {
         path: '',
