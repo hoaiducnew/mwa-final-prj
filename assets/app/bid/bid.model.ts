@@ -1,9 +1,10 @@
-
+import { User } from './../user/user.model';
 export class Bid{
-    constructor(public property: string,
+    constructor(
                 public bidAmount : number,
-                public bidTime: number,
-                public bidUser: string
+                // public bidTime: Date
+                // public bidUser: User
+                // public property: string
     ){}
 
 }
