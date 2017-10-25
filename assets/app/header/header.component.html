@@ -6,18 +6,20 @@
 
         <div class="navbar-default">
             <ul class="nav navbar-nav">
-                    <li routerLinkActive="active"><a routerLink="/auction">Auction</a></li>
-                    <li routerLinkActive="active"><a routerLink="/user">User</a></li>
-                    <li routerLinkActive="active"><a routerLink="/properties">Properties</a></li>
+                <li routerLinkActive="active"><a routerLink="/auction">Auction</a></li>
+                <!--<li routerLinkActive="active"><a routerLink="/user">User</a></li>-->
+                <li routerLinkActive="active"><a routerLink="/properties">Properties</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown" appDropdown>
-                    <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a style="cursor: pointer;">1</a></li>
-                        <li><a style="cursor: pointer;">2</a></li>
-                    </ul>
-                </li>
+                <ng-template [ngIf]="!userService.isLoggedIn()">
+                    <li routerLinkActive="active"><a routerLink="/user/signup">Register</a></li>
+                    <li routerLinkActive="active"><a routerLink="/user/signin">Login</a></li>
+                </ng-template>
+
+                <li><a
+                        style="cursor: pointer;"
+                        (click)="onLogout()"
+                        *ngIf="userService.isLoggedIn()">Logout</a></li>
             </ul>
         </div>
     </div>
