@@ -61,16 +61,11 @@ export class PropertyService {
     }
 
     addProperty(property: Property) {
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
         const body = JSON.stringify(property);
-        const headers = new HttpHeaders().set('Content-Type', 'application/json');
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
-            : '';
-        return this.http.post('http://localhost:3000/property' + token, body, {headers: headers})
-            .map(data => {
-                this.properties.push(
-                    new Property(data['obj'].name, data['obj']._id)
-                )
+        return this.http.post<Property>('http://localhost:3000/property', body, {headers: headers})
+            .map(property => {
+                this.properties.push(property);
                 this.propertiesChanged.next(this.properties.slice());
             })
             .catch(error => {
@@ -82,10 +77,7 @@ export class PropertyService {
     updateProperty(_id: string, newProperty: Property) {
         const body = JSON.stringify(newProperty);
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
-            : '';
-        return this.http.put<Property>('http://localhost:3000/property/' + _id + token, body, {headers: headers})
+        return this.http.put<Property>('http://localhost:3000/property/' + _id, body, {headers: headers})
             .map(property => {
                 const index = this.properties.findIndex(property => property._id === _id);
                 this.properties[index] = property;

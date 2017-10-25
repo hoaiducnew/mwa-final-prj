@@ -1,6 +1,38 @@
 <div class="row">
     <div class="col-xs-12">
+        <img [src]="property.imagePath" class="img-responsive" style="max-height: 300px;">
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
         <h1>{{ property.name }}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        {{ property.facilities }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        Expected Price: {{ property.expectedPrice }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        Area: {{ property.area }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        Address:
+        {{ property.address1 }}
+        {{ property.address2 }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        {{ property.city }} {{ property.state }} {{ property.zip }}
     </div>
 </div>
 

@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
         </div>
     `
 })
-export class LogoutComponent {
+export class LogoutComponent {      // NOT USE ANYMORE
 
     constructor(private userService: UserService,
                 private router: Router) {}

@@ -29,14 +29,41 @@ export class PropertyEditComponent implements OnInit {
 
     private initForm() {
         let name = '';
+        let facilities = '';
+        let imagePath = '';
+        let expectedPrice = 0;
+        let area = 0;
+        let address1 = '';
+        let address2 = '';
+        let city = '';
+        let state = '';
+        let zip = 0;
 
         if (this.editMode) {
             const property = this.propertyService.getProperty(this.id);
             name = property.name;
+            facilities = property.facilities;
+            imagePath = property.imagePath;
+            expectedPrice = property.expectedPrice;
+            area = property.area;
+            address1 = property.address1;
+            address2 = property.address2;
+            city = property.city;
+            state = property.state;
+            zip = property.zip;
         }
 
         this.propertyForm = new FormGroup({
-            'name': new FormControl(name, Validators.required)
+            'name': new FormControl(name, Validators.required),
+            'facilities': new FormControl(facilities),
+            'imagePath': new FormControl(imagePath),
+            'expectedPrice': new FormControl(expectedPrice),
+            'area': new FormControl(area),
+            'address1': new FormControl(address1),
+            'address2': new FormControl(address2),
+            'city': new FormControl(city),
+            'state': new FormControl(state),
+            'zip': new FormControl(zip)
         });
     }
 
