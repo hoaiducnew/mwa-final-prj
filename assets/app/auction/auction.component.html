@@ -7,6 +7,8 @@
             <input ngModel #startDate="ngModel" type="datetime" name="startTime" [(ngModel)]="auction.startTime" class="form-control"
                 required futureDate placeholder="yyyy-MM-dd HH:mm" />
             <div class="alert alert-danger" *ngIf="startDate.touched && !startDate.valid">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
                 <div *ngIf="startDate.errors.required">Start date is required.</div>
                 <div *ngIf="startDate.errors.invalidDate">Start date is invalid.</div>
                 <div *ngIf="startDate.errors.pastDate">Start date should be in future.</div>
@@ -15,7 +17,7 @@
         <div class="form-group">
             <label>End Date: </label>
             <input ngModel #endTime="ngModel" type="datetime" name="endTime" [(ngModel)]="auction.endTime" class="form-control" required
-            futureDate placeholder="yyyy-MM-dd HH:mm"/>
+            futureDate  placeholder="yyyy-MM-dd HH:mm"/>
             <div class="alert alert-danger" *ngIf="endTime.touched && !endTime.valid">
                 <div *ngIf="endTime.errors.required">End date is required.</div>
                 <div *ngIf="endTime.errors.invalidDate">End date is invalid.</div>

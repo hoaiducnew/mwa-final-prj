@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth-guard.service';
 import { AdminModule } from './admin/admin.module';
 import {AuctionModule} from './auction/auction.module';
 import {NgModule} from '@angular/core';
@@ -28,8 +29,6 @@ import {PropertyStartComponent} from './property/property-start/property-start.c
 import {PropertyEditComponent} from './property/property-edit/property-edit.component';
 import {AuthInterceptor} from './shared/auth.interceptor';
 import {LoggingInterceptor} from './shared/logging.interceptor';
-import {AppGuard} from './app-guard.service';
-
 
 @NgModule({
     declarations: [
@@ -61,7 +60,7 @@ import {AppGuard} from './app-guard.service';
         UserService,
         ErrorService,
         PropertyService,
-        AppGuard,
+        AuthGuard,
         {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
     ],
