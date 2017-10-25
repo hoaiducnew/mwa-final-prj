@@ -14,11 +14,10 @@ import { CommonModule }       from '@angular/common';
 @NgModule({
     imports:[
       FormsModule,
-      CommonModule
-      
+      CommonModule     
     ],
     declarations: [AuctionComponent, HomeComponent,ValidDateDirective, FutureDateDirective, DateFormatPipe],
-    exports: [AuctionComponent,HomeComponent],
+    exports: [AuctionComponent,HomeComponent,DateFormatPipe],
     providers: [AuctionService]
 })
 export class AuctionModule { }

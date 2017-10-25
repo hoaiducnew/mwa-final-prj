@@ -14,9 +14,9 @@
 
 <div class="panel panel-default">
         <div class="panel-body" *ngFor="let bids of bids">
-               <h4>Date : {{bids.bidTime | date:'medium'}} </h4> 
+               <h4>Date : {{bids.bidTime | dateFormat}} </h4> 
                <h4>Bidder : {{bids.owner.firstName}} </h4> 
-               <h4>Highest Bid Amount : {{bids.bidAmount}} </h4> 
+               <h4>Bid Amount : {{bids.bidAmount}} </h4> 
               </div>
             
 </div>

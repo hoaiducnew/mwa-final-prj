@@ -1,3 +1,4 @@
+import { AuctionModule } from './../auction/auction.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +16,7 @@ import {AuctionDetailComponent} from './auctiondetail.component';
     AuctionDetailComponent
   ],
   imports: [
-  BrowserModule,FormsModule,HttpModule, ReactiveFormsModule,HttpClientModule
+  BrowserModule,FormsModule,HttpModule, ReactiveFormsModule,HttpClientModule, AuctionModule
   ],
   exports:[BidComponent,
     CreateBidComponent,AuctionDetailComponent],
