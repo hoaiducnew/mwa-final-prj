@@ -1,3 +1,4 @@
+import { AuctionDetailComponent } from './bid/auctiondetail.component';
 import {HomeComponent} from './auction/home/home.component';
 import {AuctionComponent} from './auction/auction.component';
 import {RouterModule, Routes} from '@angular/router';

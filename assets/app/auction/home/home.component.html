@@ -7,15 +7,19 @@
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
 
-
-                    <img src="{{auction.property.imagePath}}" alt="{{auction.property.name}}" style="width: 100%" />
+                <div style="height:250px">
+                    <img src="{{auction.property.imagePath}}" alt="{{auction.property.name}}" class="img-responsive" />
+                </div>
 
                     <div class="caption">
 
-                        <div class="addressStreet">{{auction.property.name}}</div>
+                        <h3>{{auction.property.name}}<button class="btn btn-info">View Detail</button></h3>>
+
+                        <div>Auction Start Date : {{auction.startDate | dateFormat}}</div>
+
                         <div class="addressCityState">{{auction.property.address1}} ,{{auction.property.address2}} ,{{auction.property.city}}</div>
                         <div class="eventStatus">{{auction.property.state}} - {{auction.property.zip}}</div>
-                        <p><button class="btn btn-info">View Detail</button> </p>
+                       
                     </div>
 
                 </div>
