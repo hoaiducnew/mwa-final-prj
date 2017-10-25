@@ -140,7 +140,7 @@ router.get('/:id', function (req, res, next) {
 
 router.get('/', function (req, res, next) {
     var decoded = jwt.decode(req.header('token'));
-    Property.find().exec(function (err, properties) {
+    Property.find({"owner": decoded.user._id}).exec(function (err, properties) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occurred',
