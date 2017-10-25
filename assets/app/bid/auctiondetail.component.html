@@ -1,0 +1,23 @@
+<div class="container-fluid">
+                <div class="col-md-6">
+                    <img src="{{auction.property.imagePath}}" alt="{{auction.property.name}}" style="width: 100%" />
+                </div>
+                <div class="col-md-6">
+                    <h3>Property Name : {{auction.property.name}} </h3>
+                    <h4>Starting Bid : {{auction.startingBid}} </h4>
+                    <h4>Expected Price : {{auction.property.expectedPrice}} </h4>
+                    <h4>End Time : {{auction.endTime}} </h4>     
+                    <h4> <create-bid [auction]="auction"></create-bid></h4>
+                </div>  
+</div>
+<br>
+
+<div class="panel panel-default">
+        <div class="panel-body" *ngFor="let bids of bids">
+               <h4>Date : {{bids.bidTime | date:'medium'}} </h4> 
+               <h4>Bidder : {{bids.owner.firstName}} </h4> 
+               <h4>Highest Bid Amount : {{bids.bidAmount}} </h4> 
+              </div>
+            
+</div>
+

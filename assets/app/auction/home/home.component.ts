@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     }
     viewDetail(auction:Auction){
         this.auctionService.auction = auction;
-        this.router.navigate(["/auction"]);
+        this.router.navigate(["/auctiondetail"]);
 
     }
 
