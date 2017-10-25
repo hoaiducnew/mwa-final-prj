@@ -4,8 +4,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {UserComponent} from './user/user.component';
 import {BidComponent} from './bid/bid.component';
 import {USER_ROUTES} from './user/user.routes';
-
-
 import {PropertiesComponent} from './property/properties.component';
 import {PROPERTY_ROUTES} from './property/property.routes';
 import {AuthGuard} from './auth-guard.service';
@@ -38,6 +36,10 @@ const APP_ROUTES: Routes = [
     {
         path: 'bid',
         component: BidComponent
+    },
+    {
+        path: 'auctiondetail',
+        component: AuctionDetailComponent
     }
 ];
 
