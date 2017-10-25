@@ -9,13 +9,11 @@ var schema = new Schema({
     area: {type: Number},
     type: {type: String},
     imagePath: {type: String},
-    address: {
-        address1: {type: String},
-        address2: {type: String},
-        city: {type: String},
-        state: {type: String},
-        zip: {type: Number}
-    },
+    address1: {type: String},
+    address2: {type: String},
+    city: {type: String},
+    state: {type: String},
+    zip: {type: Number},
     owner: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 

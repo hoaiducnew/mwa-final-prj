@@ -13,24 +13,7 @@ export class SigninComponent implements OnInit {
     signinForm: FormGroup;
 
     constructor(private userService: UserService,
-                private router: Router,
-                private errorService: ErrorService) {
-    }
-
-    onSubmit() {
-        const user = new User(this.signinForm.value.email, this.signinForm.value.password);
-        this.userService.signin(user).subscribe(
-            data => {
-                console.log(data);
-                localStorage.setItem('token', data['token']);
-                localStorage.setItem('userId', data['userId']);
-                this.router.navigateByUrl('/');
-            },
-            error => {
-                this.errorService.handleError(error);
-            }
-        );
-        this.signinForm.reset();
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -41,5 +24,18 @@ export class SigninComponent implements OnInit {
             ]),
             password: new FormControl(null, Validators.required)
         });
+    }
+
+    onSubmit() {
+        const user = new User(this.signinForm.value.email, this.signinForm.value.password);
+        this.userService.signin(user).subscribe(
+            data => {
+                // console.log(data['message']);
+                localStorage.setItem('token', data['token']);
+                localStorage.setItem('userId', data['userId']);
+                this.router.navigateByUrl('/');
+            }
+        );
+        this.signinForm.reset();
     }
 }

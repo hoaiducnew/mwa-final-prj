@@ -10,11 +10,11 @@ export class UserListComponent {
     constructor(private http: HttpClient) {}
 
     approve(selectedUser:User){
-        this.http.post("http://localhost:3000/approveUser",selectedUser).subscribe((data)=>console.log(data));
+        this.http.post("http://localhost:3000/admin/approveUser",selectedUser).subscribe((data)=>console.log(data));
     }
 
     reject(selectedUser:User){
-        this.http.post("http://localhost:3000/rejectUser",selectedUser).subscribe((data)=>console.log(data));
+        this.http.post("http://localhost:3000/admin/rejectUser",selectedUser).subscribe((data)=>console.log(data));
     }
 
 }

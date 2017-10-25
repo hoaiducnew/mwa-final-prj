@@ -1,16 +1,17 @@
 <div class="col-md-8 col-md-offset-2">
     <form ngForm="auction" (ngSubmit)="save()">
+        <h1>{{auction.property.name}}</h1>
     <div class="form-group">
         <label>Start Date: </label>
-        <input type="datetime" name="startDate" [(ngModel)]="startDate" class="form-control" required/>
+        <input type="datetime" name="startTime" [(ngModel)]="auction.startTime" class="form-control" required/>
     </div>
     <div class="form-group">
         <label>End Date: </label>
-        <input type="datetime" name="endDate" class="form-control" required/>
+        <input type="datetime" name="endTime" [(ngModel)]= "auction.endTime" class="form-control" required/>
     </div>
     <div class="form-group">
         <label>Minimun Bid Amount: </label>
-        <input type="number" name="startingBid" class="form-control" required/>
+        <input type="number" name="startingBid" [(ngModel)] = "auction.startingBid" class="form-control" required/>
     </div>
     <button class="btn btn-primary" type="submit" [disabled]="validForm">Submit</button>
     </form>

@@ -1,3 +1,4 @@
+import { HomeComponent } from './auction/home/home.component';
 import {AuctionComponent} from './auction/auction.component';
 import {RouterModule, Routes} from '@angular/router';
 import {UserComponent} from './user/user.component';
@@ -11,8 +12,12 @@ const APP_ROUTES: Routes = [
 
     {
         path: '',
-        redirectTo: '/user',
+        redirectTo: 'home',
         pathMatch: 'full'
+    },
+    {
+        path: 'home',
+        component: HomeComponent
     },
     {
         path: 'user',
