@@ -8,7 +8,8 @@
             <ul class="nav navbar-nav">
                 <li routerLinkActive="active"><a routerLink="/auction">Auction</a></li>
                 <!--<li routerLinkActive="active"><a routerLink="/user">User</a></li>-->
-                <li routerLinkActive="active" *ngIf="userService.isLoggedIn()"><a routerLink="/properties">Properties</a></li>
+                <!--<li routerLinkActive="active" *ngIf="userService.isLoggedIn()"><a routerLink="/properties">Properties</a></li>-->
+                <li routerLinkActive="active"><a routerLink="/properties">Properties</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <ng-template [ngIf]="!userService.isLoggedIn()">
