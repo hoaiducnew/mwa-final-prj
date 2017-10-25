@@ -13,8 +13,15 @@ export class AuctionComponent implements OnInit {
     constructor(private http: HttpClient, private auctionService: AuctionService,private  router:Router) {}
     validForm:boolean =false;
     auction:Auction;
+    auctions:Auction[];
+    
      ngOnInit(){
          this.auction = this.auctionService.auction;
+         this.auctionService.getAuctions().subscribe(
+            (auctions: Auction[]) => {
+                this.auctions = auctions;
+            }
+        );
      }
 
     save(){

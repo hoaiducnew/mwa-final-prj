@@ -45,6 +45,21 @@ router.post('/', function (req, res, next) {
 
 router.get('/', function (req, res, next) {
     Auction.find()
+        .exec(function (err, auctions) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json(
+                auctions
+            );
+        });
+});
+
+router.get('/activeAuctions', function (req, res, next) {
+    Auction.findByStatus('Approved')
         .exec(function (err, properties) {
             if (err) {
                 return res.status(500).json({
