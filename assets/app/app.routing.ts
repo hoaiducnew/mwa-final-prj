@@ -10,8 +10,6 @@ import {PropertiesComponent} from './property/properties.component';
 import {PROPERTY_ROUTES} from './property/property.routes';
 
 const APP_ROUTES: Routes = [
-
-
     {
         path: '',
         redirectTo: 'home',
