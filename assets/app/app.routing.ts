@@ -8,7 +8,7 @@ import {USER_ROUTES} from './user/user.routes';
 
 import {PropertiesComponent} from './property/properties.component';
 import {PROPERTY_ROUTES} from './property/property.routes';
-import {AppGuard, AppGuardService} from './app-guard.service';
+import {AuthGuard} from './auth-guard.service';
 
 const APP_ROUTES: Routes = [
     {
@@ -32,7 +32,7 @@ const APP_ROUTES: Routes = [
     {
         path: "properties",
         component: PropertiesComponent,
-        canActivate: [AppGuard],
+        canActivate: [AuthGuard],
         children: PROPERTY_ROUTES
     },
     {
