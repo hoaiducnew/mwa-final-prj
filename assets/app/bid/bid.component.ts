@@ -1,11 +1,29 @@
-import { Component } from '@angular/core';
-
+import { Component,Input } from '@angular/core';
+import {Bid} from './bid.model';
+import {BidService} from './bid.service';
+import { DatePipe } from '@angular/common';
 @Component({
     selector: 'app-bid',
     templateUrl: './bid.component.html'
     
 })
 export class BidComponent {
-    constructor() {}
+  
+    private bids: Bid[] = [];
+    constructor(private bidService: BidService) {}
+
+    ngOnInit() {
+      
+        this.bidService.getBids().subscribe(
+            (bids: Bid[]) => {
+                this.bids = bids;
+            }
+        );
+
+        
+    }
+
+
+  
 
 }

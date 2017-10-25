@@ -1,3 +1,9 @@
 
 <h1>Bid Component....</h1>
+<div *ngFor="let bids of bids">
+  {{bids | json}}
+  {{bids.bidTime | date:'medium'}}
+</div>
 <create-bid></create-bid>
+
+
