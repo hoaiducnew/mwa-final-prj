@@ -5,10 +5,24 @@ var jwt = require('jsonwebtoken');
 var User = require('../models/user');
 var Bid = require('../models/bid');
 
+router.get("/getall",function(req,res,next){
+    Bid.find(function(err,bids){
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        return res.json(bids);
+    })
+});
+
 router.post('/',function(req,res,next){
     var decoded = jwt.decode(req.query.token);
 
+
     User.findById(decoded.user._id, function (err, user) {
+
         if (err) {
             return res.status(500).json({
                 title: 'An error occurred',
