@@ -6,14 +6,6 @@ import { User } from './../user/user.model';
 import { Auction } from './../auction/auction.model';
 import {CustomValidators} from './custom-validator'
 
-
-// function rangeValidator(c:AbstractControl):{[key:string]:boolean} | null{
-//     if(c.value!==undefined && (isNaN(c.value)||c.value<50||c.value>100)){
-//         return {'range':true};
-//     }
-//     return null;
-
-// }
 @Component({
     selector: 'create-bid',
     templateUrl: './createbid.component.html'
@@ -21,7 +13,7 @@ import {CustomValidators} from './custom-validator'
 export class CreateBidComponent {
     createbidForm: FormGroup;
 
-    a:number=10;
+    @Input() auction: Auction;
    
     constructor(private bidService: BidService) {}
     
@@ -30,6 +22,7 @@ export class CreateBidComponent {
         const bid = new Bid(
       
             this.createbidForm.value.bidAmount,  
+            this.auction
            
         );
 
@@ -44,7 +37,7 @@ export class CreateBidComponent {
 
     ngOnInit() {
         this.createbidForm = new FormGroup({
-            bidAmount: new FormControl('',[Validators.required,CustomValidators.rangeValidator(this.a,200)]),
+            bidAmount: new FormControl('',[Validators.required,CustomValidators.rangeValidator(this.auction.startingBid,this.auction.property.expectedPrice)]),
         });
     }
 

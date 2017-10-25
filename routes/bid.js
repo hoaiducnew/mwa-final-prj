@@ -18,12 +18,12 @@ router.post('/',function(req,res,next){
         var date = new Date()
         var bid = new Bid({
             bidAmount: req.body.bidAmount,
-    
             bidTime:date,
-            owner: user
+            owner: user,
+            auction: req.body.auction
 
         });
-    
+
         bid.save(function (err,result){
     
             if (err) {
@@ -45,7 +45,7 @@ router.post('/',function(req,res,next){
     
 
 router.get("/",function(req,res,next){
-    Bid.find()
+    Bid.find().populate('auction').populate('owner')
         .exec(function (err, bids) {
             if (err) {
                 return res.status(500).json({

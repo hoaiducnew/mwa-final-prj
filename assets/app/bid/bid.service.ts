@@ -3,14 +3,22 @@ import {ErrorService} from '../errors/error.service';
 import {Bid} from "./bid.model";
 import {HttpClient,  HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+import { Auction } from './../auction/auction.model';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class BidService {
-  
+    // propertiesChanged = new Subject<Bid[]>();
     
+    bid:Bid;
     private bids: Bid[] = [];
     constructor(private http: HttpClient,private errorService: ErrorService) {
     }
+
+    // set auction(auction: Auction) {
+    //     this.bid.auction = auction;
+
+    // }
 
     bidAuction(bid: Bid) {
         const body = JSON.stringify(bid);
@@ -18,6 +26,7 @@ export class BidService {
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
+
 
         return this.http.post('http://localhost:3000/bidapi'+token, body, {headers: headers});
      }

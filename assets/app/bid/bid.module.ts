@@ -7,16 +7,18 @@ import {BidComponent} from './bid.component';
 import {CreateBidComponent} from './createbid.component';
 import {BidService} from './bid.service';
 import {ErrorService} from '../errors/error.service';
+import {AuctionDetailComponent} from './auctiondetail.component';
 @NgModule({
   declarations: [
     BidComponent,
-    CreateBidComponent
+    CreateBidComponent,
+    AuctionDetailComponent
   ],
   imports: [
   BrowserModule,FormsModule,HttpModule, ReactiveFormsModule,HttpClientModule
   ],
   exports:[BidComponent,
-    CreateBidComponent],
+    CreateBidComponent,AuctionDetailComponent],
   providers: [BidService,ErrorService]
 
 })
