@@ -23,6 +23,6 @@ export class AuctionService {
         const body = JSON.stringify(auction);
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-        return this.http.post('http://localhost:3000/auction', body, { headers: headers });
+        return this.http.post('http://localhost:3000/admin/auction', body, { headers: headers });
     }
 }
