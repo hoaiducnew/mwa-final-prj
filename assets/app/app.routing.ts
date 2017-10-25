@@ -11,7 +11,7 @@ const APP_ROUTES: Routes = [
 
     {
         path: '',
-        redirectTo: 'user',
+        redirectTo: 'home',
         pathMatch: 'full'
     },
     {

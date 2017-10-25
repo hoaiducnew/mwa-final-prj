@@ -5,10 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 export const ADMIN_ROUTES: Routes = [
   {
-    path: '',
-    redirectTo: 'auctionList', pathMatch: 'full'
-  },
-  {
     path: 'auctionList',
     component: AuctionListComponent
   },

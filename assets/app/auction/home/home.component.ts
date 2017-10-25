@@ -12,20 +12,29 @@ import {AuctionService} from '../auction.service';
 })
 export class HomeComponent implements OnInit {
     constructor(private http: HttpClient, private auctionService: AuctionService,private  router:Router) {}
-    auctions:any;
-//    auctions:Observable<Auction>;
+  
+    auctions:Auction[];
+    
      ngOnInit(){
-        
+         this.auctionService.getAuctions().subscribe(
+            (auctions: Auction[]) => {
+                this.auctions = auctions;
+            }
+        );
      }
 
     save(){
         this.http.get("http://localhost:3000/admin/auction").subscribe(
             (data)=>
             {
-                this.auctions = data;
                 console.log(data);              
             });
-            this.router.navigate(['/user']);
+            this.router.navigate(['/home']);
+    }
+    viewDetail(auction:Auction){
+        this.auctionService.auction = auction;
+        this.router.navigate(["/auction"]);
+
     }
 
 }
