@@ -6,7 +6,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {BidComponent} from './bid.component';
 import {CreateBidComponent} from './createbid.component';
 import {BidService} from './bid.service';
-
+import {ErrorService} from '../errors/error.service';
 @NgModule({
   declarations: [
     BidComponent,
@@ -15,7 +15,9 @@ import {BidService} from './bid.service';
   imports: [
   BrowserModule,FormsModule,HttpModule, ReactiveFormsModule,HttpClientModule
   ],
-  providers: [BidService]
+  exports:[BidComponent,
+    CreateBidComponent],
+  providers: [BidService,ErrorService]
 
 })
 export class BidModule { }

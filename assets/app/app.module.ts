@@ -1,4 +1,4 @@
-import { BidComponent } from './bid/bid.component';
+import {AuctionModule} from './auction/auction.module';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
@@ -18,8 +18,13 @@ import {BidModule} from './bid/bid.module';
 
 import {ErrorComponent} from './errors/error.component';
 import {ErrorService} from './errors/error.service';
-
-
+import {PropertiesComponent} from './property/properties.component';
+import {PropertyDetailComponent} from './property/property-detail/property-detail.component';
+import {PropertyListComponent} from './property/property-list/property-list.component';
+import {PropertyItemComponent} from './property/property-list/property-item/property-item.component';
+import {PropertyService} from './property/property.service';
+import {PropertyStartComponent} from './property/property-start/property-start.component';
+import {PropertyEditComponent} from './property/property-edit/property-edit.component';
 
 
 @NgModule({
@@ -30,8 +35,13 @@ import {ErrorService} from './errors/error.service';
         LogoutComponent,
         SignupComponent,
         SigninComponent,
-      ErrorComponent
-
+        ErrorComponent,
+        PropertiesComponent,
+        PropertyDetailComponent,
+        PropertyListComponent,
+        PropertyItemComponent,
+        PropertyStartComponent,
+        PropertyEditComponent
     ],
     imports: [
         BrowserModule,
@@ -39,10 +49,11 @@ import {ErrorService} from './errors/error.service';
         routing,
         ReactiveFormsModule,
         HttpClientModule,
+        AuctionModule,
         BidModule
     ],
     providers: [
-        UserService, ErrorService
+        UserService, ErrorService, PropertyService
     ],
     bootstrap: [AppComponent]
 })

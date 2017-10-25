@@ -1,0 +1,26 @@
+<h1>{{title}}</h1>
+
+<table class="table">
+        <tr>
+				<th>Property Name</th>
+				<th>Owner Description</th>
+				<th>Expected Price</th>
+				<th>Start Date</th>
+				<th>End Date</th>
+				<th>Status</th>
+			</tr>
+    <tr *ngFor="let auction of auctions">
+        <td>{{auction.property.name}}</td>
+        <td>{{auction.owner.name}}</td>
+        <td>{{auction.property.expectedPrice}}</td>
+        <td>{{auction.startDate}}</td>
+        <td>{{auction.endDate}}</td>
+        <td>{{auction.status}}</td>
+        <td>
+            <button (click)="approve(auction)">Approve</button>
+        </td>
+        <td>
+            <button (click)="reject(auction)">Reject</button>
+        </td>
+    </tr>
+</table>
