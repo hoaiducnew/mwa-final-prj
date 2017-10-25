@@ -12,7 +12,7 @@ import {routing} from './app.routing';
 import {LogoutComponent} from './user/logout.component';
 import {SignupComponent} from './user/signup.component';
 import {SigninComponent} from './user/signin.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {UserService} from './user/user.service';
 import {BidModule} from './bid/bid.module';
 
@@ -25,6 +25,8 @@ import {PropertyItemComponent} from './property/property-list/property-item/prop
 import {PropertyService} from './property/property.service';
 import {PropertyStartComponent} from './property/property-start/property-start.component';
 import {PropertyEditComponent} from './property/property-edit/property-edit.component';
+import {AuthInterceptor} from './shared/auth.interceptor';
+import {LoggingInterceptor} from './shared/logging.interceptor';
 
 
 @NgModule({
@@ -53,7 +55,11 @@ import {PropertyEditComponent} from './property/property-edit/property-edit.comp
         BidModule
     ],
     providers: [
-        UserService, ErrorService, PropertyService
+        UserService,
+        ErrorService,
+        PropertyService,
+        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
     ],
     bootstrap: [AppComponent]
 })

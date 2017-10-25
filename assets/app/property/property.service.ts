@@ -4,38 +4,26 @@ import {Property} from './property.model';
 import {Subject} from 'rxjs/Subject';
 import {ErrorService} from '../errors/error.service';
 import {Observable} from 'rxjs/Observable';
-import {Message} from '@angular/compiler/src/i18n/i18n_ast';
 
 @Injectable()
 export class PropertyService {
     propertiesChanged = new Subject<Property[]>();
 
     private properties: Property[] = [];
-    propertyIsEdit = new EventEmitter<Property>();
+    // propertyIsEdit = new EventEmitter<Property>();
 
     constructor(private http: HttpClient,
                 private errorService: ErrorService) {
     }
 
     getProperties() {
-        const headers = new HttpHeaders().set('Content-Type', 'application/json');
-
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
-            : '';
-        return this.http.get('http://localhost:3000/property' + token, {headers: headers})
-            .map(data => {
-                let transformedProperties: Property[] = [];
-                for (let property of data['obj']) {
-                    transformedProperties.push(new Property(
-                        property.name,
-                        property._id
-                        )
-                    );
-                }
-                this.properties = transformedProperties;
-                return transformedProperties;
-            })
+        var headers = new HttpHeaders().set('Content-Type', 'application/json');
+        // var headers = new HttpHeaders().set('token', localStorage.getItem('token'));
+        // headers.append('Content-Type', 'application/json');
+        // console.log(localStorage.getItem('token'));
+        // console.log(localStorage.getItem('token'));
+        return this.http.get<Property[]>('http://localhost:3000/property', {headers: headers})
+            .map(properties => this.properties = properties)
             .catch(error => {
                 this.errorService.handleError(error.error);
                 return Observable.throw(error.error);
@@ -98,9 +86,9 @@ export class PropertyService {
             ? '?token=' + localStorage.getItem('token')
             : '';
         return this.http.put<Property>('http://localhost:3000/property/' + _id + token, body, {headers: headers})
-            .map(data => {
+            .map(property => {
                 const index = this.properties.findIndex(property => property._id === _id);
-                this.properties[index] = data;
+                this.properties[index] = property;
                 this.propertiesChanged.next(this.properties.slice());
             })
             .catch(error => {

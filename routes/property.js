@@ -40,10 +40,7 @@ router.post('/', function (req, res, next) {
                 });
             }
 
-            res.status(201).json({
-                message: 'Property created',
-                obj: result
-            });
+            res.status(201).json(result);
         });
     });
 });
@@ -127,14 +124,12 @@ router.get('/:id', function (req, res, next) {
                 error: err
             });
         }
-        res.status(200).json({
-            message: 'Success',
-            obj: property
-        });
+        res.status(200).json(property);
     });
 });
 
 router.get('/', function (req, res, next) {
+    // var decoded = jwt.decode(req.header('token'));
     Property.find().exec(function (err, properties) {
         if (err) {
             return res.status(500).json({
@@ -142,13 +137,8 @@ router.get('/', function (req, res, next) {
                 error: err
             });
         }
-        res.status(200).json({
-            message: 'Success',
-            obj: properties
-        });
+        res.status(200).json(properties);
     });
 });
-
-
 
 module.exports = router;
