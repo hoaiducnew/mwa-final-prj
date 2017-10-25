@@ -40,16 +40,13 @@ router.post('/', function (req, res, next) {
                 });
             }
 
-            res.status(201).json({
-                message: 'Property created',
-                obj: result
-            });
+            res.status(201).json(result);
         });
     });
 });
 
 router.delete('/:id', function (req, res, next) {
-    var decoded = jwt.decode(req.query.token);
+    // var decoded = jwt.decode(req.query.token);
     Property.findById(req.params.id, function (err, property) {
         console.log(property);
         if (err) {
@@ -64,12 +61,12 @@ router.delete('/:id', function (req, res, next) {
                 error: {message: 'Property not found'}
             });
         }
-        if (property.owner != decoded.user._id) {
-            return res.status(401).json({
-                title: 'Not Authenticated',
-                error: {message: 'Users do not match'}
-            });
-        }
+        // if (property.owner != decoded.user._id) {
+        //     return res.status(401).json({
+        //         title: 'Not Authenticated',
+        //         error: {message: 'Users do not match'}
+        //     });
+        // }
         property.remove(function (err, result) {
             if (err) {
                 return res.status(500).json({
@@ -85,23 +82,63 @@ router.delete('/:id', function (req, res, next) {
     });
 });
 
-router.get('/', function (req, res, next) {
-    console.log('aaaa');
-    Property.find()
-        .exec(function (err, properties) {
+router.put('/:id', function (req, res, next) {
+    // var decoded = jwt.decode(req.query.token);
+    Property.findById(req.params.id, function (err, property) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        if (!property) {
+            return res.status(500).json({
+                title: 'No Property Found!',
+                error: {message: 'Property not found'}
+            });
+        }
+        // if (property.owner != decoded.user._id) {
+        //     return res.status(401).json({
+        //         title: 'Not Authenticated',
+        //         error: {message: 'Users do not match'}
+        //     });
+        // }
+        property.name = req.body.name;
+        property.save(function (err, result) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occurred',
                     error: err
                 });
             }
-            res.status(200).json({
-                message: 'Success',
-                obj: properties
-            });
+            res.status(200).json(result);
         });
+    });
 });
 
+router.get('/:id', function (req, res, next) {
+    Property.findById(req.params.id, function (err, property) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        res.status(200).json(property);
+    });
+});
 
+router.get('/', function (req, res, next) {
+    // var decoded = jwt.decode(req.header('token'));
+    Property.find().exec(function (err, properties) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        res.status(200).json(properties);
+    });
+});
 
 module.exports = router;

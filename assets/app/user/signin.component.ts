@@ -17,22 +17,6 @@ export class SigninComponent implements OnInit {
                 private errorService: ErrorService) {
     }
 
-    onSubmit() {
-        const user = new User(this.signinForm.value.email, this.signinForm.value.password);
-        this.userService.signin(user).subscribe(
-            data => {
-                console.log(data);
-                localStorage.setItem('token', data['token']);
-                localStorage.setItem('userId', data['userId']);
-                this.router.navigateByUrl('/');
-            },
-            error => {
-                this.errorService.handleError(error);
-            }
-        );
-        this.signinForm.reset();
-    }
-
     ngOnInit() {
         this.signinForm = new FormGroup({
             email: new FormControl(null, [
@@ -41,5 +25,18 @@ export class SigninComponent implements OnInit {
             ]),
             password: new FormControl(null, Validators.required)
         });
+    }
+
+    onSubmit() {
+        const user = new User(this.signinForm.value.email, this.signinForm.value.password);
+        this.userService.signin(user).subscribe(
+            data => {
+                console.log(data['message']);
+                localStorage.setItem('token', data['token']);
+                localStorage.setItem('userId', data['userId']);
+                this.router.navigateByUrl('/');
+            }
+        );
+        this.signinForm.reset();
     }
 }

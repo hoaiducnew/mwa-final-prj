@@ -24,9 +24,9 @@ export class SignupComponent implements OnInit {
         );
 
         this.userService.signup(user).subscribe(
-            data => console.log(data),
-            error => {
-                this.errorService.handleError(error);
+            data => {
+                console.log(data['message']);
+                console.log(data['obj']);
             }
         );
 
