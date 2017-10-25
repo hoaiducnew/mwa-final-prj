@@ -5,14 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 export const ADMIN_ROUTES: Routes = [
   {
-    path: 'auctionList',
+    path: 'admin/auctionList',
     component: AuctionListComponent
   },
   {
-    path: 'userList',
+    path: 'admin/userList',
     component: UserListComponent
-  }
- 
+  } 
 ];
 
 @NgModule({ 

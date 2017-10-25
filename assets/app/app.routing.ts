@@ -11,8 +11,6 @@ import {PROPERTY_ROUTES} from './property/property.routes';
 import {AppGuard, AppGuardService} from './app-guard.service';
 
 const APP_ROUTES: Routes = [
-
-
     {
         path: '',
         redirectTo: 'home',

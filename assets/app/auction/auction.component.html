@@ -1,18 +1,33 @@
 <div class="col-md-8 col-md-offset-2">
-    <form ngForm="auction" (ngSubmit)="save()">
+    <form #auctionForm="ngForm" (ngSubmit)="auctionForm.valid && save(auctionForm)">
+        <div *ngIf="auctionForm.errors" class="alert alert-danger"> Please enter valid Values </div>
         <h1>{{auction.property.name}}</h1>
-    <div class="form-group">
-        <label>Start Date: </label>
-        <input type="datetime" name="startTime" [(ngModel)]="auction.startTime" class="form-control" required/>
-    </div>
-    <div class="form-group">
-        <label>End Date: </label>
-        <input type="datetime" name="endTime" [(ngModel)]= "auction.endTime" class="form-control" required/>
-    </div>
-    <div class="form-group">
-        <label>Minimun Bid Amount: </label>
-        <input type="number" name="startingBid" [(ngModel)] = "auction.startingBid" class="form-control" required/>
-    </div>
-    <button class="btn btn-primary" type="submit" [disabled]="validForm">Submit</button>
+        <div class="form-group">
+            <label>Start Date: </label>
+            <input ngModel #startDate="ngModel" type="datetime" name="startTime" [(ngModel)]="auction.startTime" class="form-control"
+                required futureDate placeholder="yyyy-MM-dd HH:mm" />
+            <div class="alert alert-danger" *ngIf="startDate.touched && !startDate.valid">
+                <div *ngIf="startDate.errors.required">Start date is required.</div>
+                <div *ngIf="startDate.errors.invalidDate">Start date is invalid.</div>
+                <div *ngIf="startDate.errors.pastDate">Start date should be in future.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>End Date: </label>
+            <input ngModel #endTime="ngModel" type="datetime" name="endTime" [(ngModel)]="auction.endTime" class="form-control" required
+            futureDate placeholder="yyyy-MM-dd HH:mm"/>
+            <div class="alert alert-danger" *ngIf="endTime.touched && !endTime.valid">
+                <div *ngIf="endTime.errors.required">End date is required.</div>
+                <div *ngIf="endTime.errors.invalidDate">End date is invalid.</div>
+                <div *ngIf="endTime.errors.pastDate">End date should be in future.</div>
+                
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label>Minimun Bid Amount: </label>
+            <input type="number" name="startingBid" [(ngModel)]="auction.startingBid" class="form-control" required/>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!auctionForm.valid">Submit</button>
     </form>
 </div>
