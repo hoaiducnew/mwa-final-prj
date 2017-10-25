@@ -1,3 +1,4 @@
+import { DateFormatPipe } from './pipe/date-format.pipe';
 import { FutureDateDirective } from './validator/auction-future.directive';
 import { ValidDateDirective } from './validator/auction-date.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -22,7 +23,7 @@ import { CommonModule }       from '@angular/common';
       NgbModule.forRoot()
       
     ],
-    declarations: [AuctionComponent, HomeComponent,DatePickerComponent,ValidDateDirective, FutureDateDirective],
+    declarations: [AuctionComponent, HomeComponent,DatePickerComponent,ValidDateDirective, FutureDateDirective, DateFormatPipe],
     exports: [AuctionComponent,HomeComponent,DatePickerComponent],
     providers: [AuctionService]
 })
