@@ -1,9 +1,13 @@
+import { User } from './../user/user.model';
+
+import { Property } from './../property/property.model';
+import { Auction } from './../auction/auction.model';
 
 export class Bid{
-    constructor(public property: string,
+    constructor(
                 public bidAmount : number,
-                public bidTime: number,
-                public bidUser: string
+                // public auction: Auction
+
     ){}
 
 }

@@ -46,7 +46,7 @@ app.use('/admin/auction', auctionRoutes);
 app.use('/property', propertyRoutes);
 app.use('/user', userRoutes);
 app.use('/', appRoutes);
-app.use('/bid', bidRoutes);
+app.use('/bidapi', bidRoutes);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     return res.render('index');

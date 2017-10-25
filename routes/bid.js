@@ -1,18 +1,27 @@
 var express = require('express');
 var router = express.Router();
+var jwt = require('jsonwebtoken');
 
+var User = require('../models/user');
 var Bid = require('../models/bid');
 
-router.post('/',function(req,res,next){
-
-    var bid = new Bid({
-        amount: req.body.amount
-        // time: req.body.time,
-        // bidder: req.body.bidder,
-        // property: req.body.property
+router.get("/getall",function(req,res,next){
+    Bid.find(function(err,bids){
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        return res.json(bids);
     })
+});
 
-    bid.save(function (err,result){
+router.post('/',function(req,res,next){
+    var decoded = jwt.decode(req.query.token);
+
+
+    User.findById(decoded.user._id, function (err, user) {
 
         if (err) {
             return res.status(500).json({
@@ -20,14 +29,50 @@ router.post('/',function(req,res,next){
                 error: err
             });
         }
-        res.status(201).json({
-            message: 'bid created',
-            obj: result
+        var date = new Date()
+        var bid = new Bid({
+            bidAmount: req.body.bidAmount,
+    
+            bidTime:date,
+            owner: user
+
         });
-
+    
+        bid.save(function (err,result){
+    
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(201).json({
+                message: 'bid created',
+                obj: result
+            });
+    
+        });
+    
     });
+});
 
+    
+
+router.get("/",function(req,res,next){
+    Bid.find()
+        .exec(function (err, bids) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                obj: bids
+            });
 });
 
 
+});
 module.exports = router;
