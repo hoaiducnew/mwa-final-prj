@@ -1,3 +1,4 @@
+import { HighlightDirective } from './directive/highlight.directive';
 import { DateFormatPipe } from './pipe/date-format.pipe';
 import { FutureDateDirective } from './validator/auction-future.directive';
 import { ValidDateDirective } from './validator/auction-date.directive';
@@ -16,8 +17,8 @@ import { CommonModule }       from '@angular/common';
       FormsModule,
       CommonModule     
     ],
-    declarations: [AuctionComponent, HomeComponent,ValidDateDirective, FutureDateDirective, DateFormatPipe],
-    exports: [AuctionComponent,HomeComponent,DateFormatPipe],
+    declarations: [AuctionComponent, HomeComponent,ValidDateDirective, FutureDateDirective, DateFormatPipe,HighlightDirective],
+    exports: [AuctionComponent,HomeComponent,DateFormatPipe,HighlightDirective],
     providers: [AuctionService]
 })
 export class AuctionModule { }

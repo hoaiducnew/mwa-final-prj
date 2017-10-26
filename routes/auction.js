@@ -6,6 +6,19 @@ var User = require('../models/user');
 var Property = require('../models/property');
 var Auction = require('../models/auction');
 
+router.post('/', function(req, res, next) {
+    var decoded = jwt.decode(req.header('token'));
+
+    if (!decoded.user) {
+        return res.status(401).json({
+            title: 'Not Authenticated',
+            error: err
+        });
+    }
+    console.log('username: ' + decoded.user.email);
+    next();
+});
+
 router.post('/', function (req, res, next) {
         var auction = new Auction({
             startTime: req.body.startTime,

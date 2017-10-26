@@ -2,9 +2,10 @@
     <form #auctionForm="ngForm" (ngSubmit)="auctionForm.valid && save(auctionForm)">
         <div *ngIf="auctionForm.errors" class="alert alert-danger"> Please enter valid Values </div>
         <h1>{{auction.property.name}}</h1>
+        <h4>Expected Price : $ {{auction.property.expectedPrice}}</h4>
         <div class="form-group">
             <label>Start Date: </label>
-            <input ngModel #startDate="ngModel" type="datetime" name="startTime" [(ngModel)]="auction.startTime" class="form-control"
+            <input ngModel myHighlight highlightColor="pink"  #startDate="ngModel" type="datetime" name="startTime" [(ngModel)]="auction.startTime" class="form-control"
                 required futureDate placeholder="yyyy-MM-dd HH:mm" />
             <div class="alert alert-danger" *ngIf="startDate.touched && !startDate.valid">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -16,7 +17,7 @@
         </div>
         <div class="form-group">
             <label>End Date: </label>
-            <input ngModel #endTime="ngModel" type="datetime" name="endTime" [(ngModel)]="auction.endTime" class="form-control" required
+            <input ngModel myHighlight highlightColor="pink" #endTime="ngModel" type="datetime" name="endTime" [(ngModel)]="auction.endTime" class="form-control" required
             futureDate  placeholder="yyyy-MM-dd HH:mm"/>
             <div class="alert alert-danger" *ngIf="endTime.touched && !endTime.valid">
                 <div *ngIf="endTime.errors.required">End date is required.</div>
@@ -27,8 +28,8 @@
 
         </div>
         <div class="form-group">
-            <label>Minimun Bid Amount: </label>
-            <input type="number" name="startingBid" [(ngModel)]="auction.startingBid" class="form-control" required/>
+            <label>Minimum Bid Amount: </label>
+            <input type="number" myHighlight highlightColor="pink"  name="startingBid" [(ngModel)]="auction.startingBid" class="form-control" required/>
         </div>
         <button class="btn btn-primary" type="submit" [disabled]="!auctionForm.valid">Submit</button>
     </form>
