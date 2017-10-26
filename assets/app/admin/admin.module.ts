@@ -1,3 +1,4 @@
+import { AdminGuard } from './guard/admin-guard.service';
 import { AdminRoutesModule } from './admin-routes.module';
 import { AdminService } from './admin.service';
 import { AuctionListComponent } from './auction-list.component';
@@ -15,6 +16,6 @@ import { CommonModule } from '@angular/common';
   ],
   declarations: [UserListComponent, AuctionListComponent],
   exports: [UserListComponent, AuctionListComponent],
-  providers: [AdminService]
+  providers: [AdminService,AdminGuard]
 })
 export class AdminModule { }

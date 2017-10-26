@@ -4,9 +4,9 @@
                 </div>
                 <div class="col-md-6">
                     <h3>Property Name : {{auction.property.name}} </h3>
-                    <h4>Starting Bid : {{auction.startingBid}} </h4>
+                    <h4>Current Highest Bid : {{auction.currentBid}} </h4>
                     <!-- <h4>Expected Price : {{auction.property.expectedPrice}} </h4> -->
-                    <h4>End Time : {{auction.endTime}} </h4>     
+                    <h4>End Time : {{auction.endTime | date:"medium"}} </h4>     
                     <create-bid  *ngIf="userService.isLoggedIn()" [auction]="auction"></create-bid>
                     <a routerLink="/user/signin"  *ngIf="!userService.isLoggedIn()" class="btn btn-primary">Login to Bid</a>
                 </div>  

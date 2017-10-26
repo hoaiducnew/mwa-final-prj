@@ -1,3 +1,4 @@
+import { AuctionService } from './../auction/auction.service';
 import {Injectable} from "@angular/core";
 import {ErrorService} from '../errors/error.service';
 import {Bid} from "./bid.model";
@@ -12,7 +13,7 @@ export class BidService {
     
     bid:Bid;
     private bids: Bid[] = [];
-    constructor(private http: HttpClient,private errorService: ErrorService) {
+    constructor(private http: HttpClient,private errorService: ErrorService, private auctionService:AuctionService) {
     }
 
     // set auction(auction: Auction) {
@@ -21,6 +22,8 @@ export class BidService {
     // }
 
     bidAuction(bid: Bid) {
+        bid.auction.currentBid = bid.bidAmount;
+        this.auctionService.bidAuction(bid.auction);
         const body = JSON.stringify(bid);
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
         const token = localStorage.getItem('token')

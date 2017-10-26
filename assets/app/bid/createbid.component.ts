@@ -37,7 +37,8 @@ export class CreateBidComponent {
 
     ngOnInit() {
         this.createbidForm = new FormGroup({
-            bidAmount: new FormControl('',[Validators.required,CustomValidators.rangeValidator(this.auction.startingBid,this.auction.property.expectedPrice)]),
+   //         bidAmount: new FormControl('',[Validators.required,CustomValidators.rangeValidator(this.auction.startingBid,this.auction.property.expectedPrice)]),
+            bidAmount: new FormControl('',[Validators.required,CustomValidators.minBidValidator(this.auction.startingBid,this.auction.currentBid)]),
         });
     }
 

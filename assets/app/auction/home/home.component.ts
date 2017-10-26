@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { Auction } from '../auction.model';
@@ -14,8 +15,14 @@ export class HomeComponent implements OnInit {
     constructor(private http: HttpClient, private auctionService: AuctionService,private  router:Router) {}
   
     auctions:Auction[];
+    subscription:Subscription;
     
      ngOnInit(){
+        this.subscription = this.auctionService.auctionChanged.subscribe(
+            (auctions: Auction[]) => {
+                this.auctions = auctions;
+            }
+          );
          this.auctionService.getActiveAuctions().subscribe(
             (auctions: Auction[]) => {
                 this.auctions = auctions;
