@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { ErrorService } from './../errors/error.service';
 import { Property } from './../property/property.model';
 import { Injectable } from "@angular/core";
@@ -14,6 +15,8 @@ export class AuctionService {
 
     auction:Auction;
     auctions:Auction[];
+    auctionChanged = new Subject<Auction[]>();
+
     constructor(private http: HttpClient, private errorService:ErrorService) {
         this.auction=new Auction();
     }
@@ -25,10 +28,13 @@ export class AuctionService {
     }
 
     saveAuction(auction: Auction) {
-        console.log("from service");
         const body = JSON.stringify(auction);
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3000/admin/auction', body, { headers: headers });
+        return this.http.post('http://localhost:3000/admin/auction', body, { headers: headers })
+        .map(data=>this.auctionChanged.next());
+    }
+    bidAuction(auction: Auction) {
+        this.http.put("http://localhost:3000/admin/auction/addBid",auction).subscribe((data)=>console.log(data));
     }
 
     getActiveAuctions() {

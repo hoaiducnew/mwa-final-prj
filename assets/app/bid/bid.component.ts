@@ -14,11 +14,11 @@ export class BidComponent {
 
     ngOnInit() {
       
-        this.bidService.getBids().subscribe(
-            (bids: Bid[]) => {
-                this.bids = bids;
-            }
-        );
+        // this.bidService.getBids(this.bidService.).subscribe(
+        //     (bids: Bid[]) => {
+        //         this.bids = bids;
+        //     }
+        // );
 
         
     }

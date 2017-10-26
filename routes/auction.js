@@ -59,6 +59,32 @@ router.put('/changeStatus', function (req, res, next) {
         });
     });
 });
+router.put('/addBid', function (req, res, next) {
+    
+        Auction.findById(req.body._id, function (err, auction) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }      
+            auction.currentBid = req.body.currentBid;
+            auction.save(function (err, result) {
+                if (err) {
+                    return res.status(500).json({
+                        title: 'An error occurred',
+                        error: err
+                    });
+                }
+    
+                res.status(201).json({
+                    message: 'auction bidded',
+                    obj: result
+                });
+            });
+        });
+    });
+    
 
 router.get('/', function (req, res, next) {
     Auction.find().populate('property')
@@ -74,7 +100,6 @@ router.get('/', function (req, res, next) {
             );
         });
 });
-
 // router.get('/:id', function (req, res, next) {
 //     var decoded = jwt.decode(req.header('token'));
 //     Auction.findById(req.params.id, function (err, auction) {
