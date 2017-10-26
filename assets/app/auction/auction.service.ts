@@ -25,15 +25,15 @@ export class AuctionService {
     }
 
     saveAuction(auction: Auction) {
+        console.log("from service");
         const body = JSON.stringify(auction);
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
-
         return this.http.post('http://localhost:3000/admin/auction', body, { headers: headers });
     }
 
     getActiveAuctions() {
         var headers = new HttpHeaders().set('Content-Type', 'application/json');
-         return this.http.get<Auction[]>('http://localhost:3000/admin/auction/activeAuctions', {headers: headers})
+         return this.http.get<Auction[]>('http://localhost:3000/admin/auction/active', {headers: headers})
             .map(auctions => this.auctions = auctions)
             .catch(error => {
                 this.errorService.handleError(error.error);
@@ -49,6 +49,10 @@ export class AuctionService {
                 this.errorService.handleError(error.error);
                 return Observable.throw(error.error);
             });
+    }
+    statusUpdateAuction(auction:Auction){
+        this.http.put("http://localhost:3000/admin/auction/changeStatus",auction).subscribe((data)=>console.log(data));
+        
     }
 
 }

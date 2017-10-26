@@ -21,9 +21,9 @@
         <td>{{auction.endTime | date:"medium"}}</td>
         <td>{{auction.status}}</td>
         <td>
-            <button (click)="approve(auction)">Approve</button>
+            <button (click)="approve(auction)" class="btn btn-primary">Approve</button>
        
-            <button (click)="reject(auction)">Reject</button>
+            <button (click)="reject(auction)" class="btn btn-alert">Reject</button>
         </td>
     </tr>
 </table>

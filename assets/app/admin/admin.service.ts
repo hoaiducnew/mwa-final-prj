@@ -1,3 +1,4 @@
+import { Auction } from './../auction/auction.model';
 import {Injectable} from "@angular/core";
 import 'rxjs/Rx';
 
@@ -8,6 +9,7 @@ import {ErrorService} from '../errors/error.service';
 export class AdminService {
     constructor(private http: HttpClient, private errorService: ErrorService) {
     }
+
 
    
 }
