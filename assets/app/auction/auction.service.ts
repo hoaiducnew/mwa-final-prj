@@ -30,8 +30,8 @@ export class AuctionService {
     saveAuction(auction: Auction) {
         const body = JSON.stringify(auction);
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3000/admin/auction', body, { headers: headers })
-        .map(data=>this.auctionChanged.next());
+        return this.http.post('http://localhost:3000/admin/auction', body, { headers: headers });
+        //.map(data=>this.auctionChanged.next());
     }
     bidAuction(auction: Auction) {
         this.http.put("http://localhost:3000/admin/auction/addBid",auction).subscribe((data)=>console.log(data));
