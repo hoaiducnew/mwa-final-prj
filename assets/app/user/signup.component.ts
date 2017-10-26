@@ -2,16 +2,21 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from './user.service';
 import {User} from './user.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CanComponentDeactivate} from '../can-deactivate-guard.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
     selector: 'app-signup',
     templateUrl: './signup.component.html'
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, CanComponentDeactivate {
     signupForm: FormGroup;
     commonPasswords = ['root', 'password', '123456'];
+    changesSaved = false;
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService,
+                private router: Router) {
     }
 
     onSubmit() {
@@ -24,8 +29,10 @@ export class SignupComponent implements OnInit {
         );
 
         this.userService.signup(user).subscribe();
-
         this.signupForm.reset();
+
+        this.changesSaved = true;
+        this.router.navigate(['/user', 'signin']);
     }
 
     ngOnInit() {
@@ -46,5 +53,17 @@ export class SignupComponent implements OnInit {
             return {'passwordIsForbidden': true};
         }
         return null;
+    }
+
+    canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+        if ((this.signupForm.value.firstName !== ''
+                || this.signupForm.value.lastName !== ''
+                || this.signupForm.value.email() !== ''
+                || this.signupForm.value.password !== '')
+            && !this.changesSaved) {
+            return confirm('Do you want to discard the changes?');
+        } else {
+            return true;
+        }
     }
 }

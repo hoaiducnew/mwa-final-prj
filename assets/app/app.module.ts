@@ -29,6 +29,7 @@ import {PropertyStartComponent} from './property/property-start/property-start.c
 import {PropertyEditComponent} from './property/property-edit/property-edit.component';
 import {AuthInterceptor} from './shared/auth.interceptor';
 import {LoggingInterceptor} from './shared/logging.interceptor';
+import {CanDeactivateGuard} from './can-deactivate-guard.service';
 
 @NgModule({
     declarations: [
@@ -61,6 +62,7 @@ import {LoggingInterceptor} from './shared/logging.interceptor';
         ErrorService,
         PropertyService,
         AuthGuard,
+        CanDeactivateGuard,
         {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
     ],
