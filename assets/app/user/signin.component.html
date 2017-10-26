@@ -20,7 +20,6 @@
                     class="form-control"
                     formControlName="password">
             <span *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched" class="help-block">
-                <span *ngIf="signinForm.get('password').errors['minlength']">Password needs at least 6 characters!</span>
                 <span *ngIf="signinForm.get('password').errors['required']">This field is required!</span>
             </span>
         </div>
