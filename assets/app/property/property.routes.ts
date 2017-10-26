@@ -11,8 +11,8 @@ export const PROPERTY_ROUTES: Routes = [
     },
     {
         path: 'new',
-        component: PropertyEditComponent,
-        canDeactivate: [CanDeactivateGuard]
+        component: PropertyEditComponent
+        // canDeactivate: [CanDeactivateGuard]
     },
     {
         path: ':id',
@@ -20,7 +20,7 @@ export const PROPERTY_ROUTES: Routes = [
     },
     {
         path: ':id/edit',
-        component: PropertyEditComponent,
-        canDeactivate: [CanDeactivateGuard]
+        component: PropertyEditComponent
+        // canDeactivate: [CanDeactivateGuard]
     }
 ];
