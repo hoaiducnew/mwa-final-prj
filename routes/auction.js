@@ -7,15 +7,6 @@ var Property = require('../models/property');
 var Auction = require('../models/auction');
 
 router.post('/', function (req, res, next) {
-    var decoded = jwt.decode(req.query.token);
-    User.findById(decoded.user._id, function (err, user) {
-        if (err) {
-            return res.status(500).json({
-                title: 'An error occurred',
-                error: err
-            });
-        }
-
         var auction = new Auction({
             startTime: req.body.startTime,
             endTime: req.body.endTime,
@@ -40,13 +31,12 @@ router.post('/', function (req, res, next) {
                 obj: result
             });
         });
-    });
+
 });
 
-router.post('/changeStatus', function (req, res, next) {
-    var decoded = jwt.decode(req.header('token'));
-    console.log("test:"+req.body);
-    Auction.findById(req.params.id, function (err, auction) {
+router.put('/changeStatus', function (req, res, next) {
+
+    Auction.findById(req.body._id, function (err, auction) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occurred',
@@ -70,7 +60,6 @@ router.post('/changeStatus', function (req, res, next) {
     });
 });
 
-
 router.get('/', function (req, res, next) {
     Auction.find().populate('property')
         .exec(function (err, auctions) {
@@ -85,20 +74,21 @@ router.get('/', function (req, res, next) {
             );
         });
 });
-router.get('/:id', function (req, res, next) {
-    var decoded = jwt.decode(req.header('token'));
-    Auction.findById(req.params.id, function (err, auction) {
-        if (err) {
-            return res.status(500).json({
-                title: 'An error occurred',
-                error: err
-            });
-        }
-        res.status(200).json(auction);
-    });
-});
-router.get('/activeAuctions', function (req, res, next) {
-    Auction.findByStatus('APPROVED')
+
+// router.get('/:id', function (req, res, next) {
+//     var decoded = jwt.decode(req.header('token'));
+//     Auction.findById(req.params.id, function (err, auction) {
+//         if (err) {
+//             return res.status(500).json({
+//                 title: 'An error occurred',
+//                 error: err
+//             });
+//         }
+//         res.status(200).json(auction);
+//     });
+// });
+router.get('/active', function (req, res, next) {
+    Auction.find({"status":"APPROVED"}).populate("property")
         .exec(function (err, properties) {
             if (err) {
                 return res.status(500).json({
@@ -106,10 +96,10 @@ router.get('/activeAuctions', function (req, res, next) {
                     error: err
                 });
             }
-            res.status(200).json({
-                message: 'Success',
-                obj: properties
-            });
+            
+            res.status(200).json(
+                properties
+            );
         });
 });
 

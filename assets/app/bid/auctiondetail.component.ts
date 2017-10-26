@@ -1,3 +1,4 @@
+import { UserService } from './../user/user.service';
 import { Component,Input } from '@angular/core';
 import { Auction } from './../auction/auction.model';
 import {AuctionService} from './../auction/auction.service';
@@ -16,7 +17,7 @@ export class AuctionDetailComponent {
 
     private bids: Bid[] = [];
 
-    constructor(private auctionService: AuctionService,private bidService: BidService) {}
+    constructor(private auctionService: AuctionService,private bidService: BidService,private userService: UserService) {}
 
     ngOnInit() {
       this.auction = this.auctionService.auction;

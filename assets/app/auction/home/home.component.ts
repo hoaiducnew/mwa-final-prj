@@ -16,21 +16,13 @@ export class HomeComponent implements OnInit {
     auctions:Auction[];
     
      ngOnInit(){
-         this.auctionService.getAuctions().subscribe(
+         this.auctionService.getActiveAuctions().subscribe(
             (auctions: Auction[]) => {
                 this.auctions = auctions;
             }
         );
      }
 
-    save(){
-        this.http.get("http://localhost:3000/admin/auction").subscribe(
-            (data)=>
-            {
-                console.log(data);              
-            });
-            this.router.navigate(['/home']);
-    }
     viewDetail(auction:Auction){
         this.auctionService.auction = auction;
         this.router.navigate(["/auctiondetail"]);
