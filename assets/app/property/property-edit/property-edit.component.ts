@@ -2,20 +2,25 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {PropertyService} from '../property.service';
-import {ErrorService} from '../../errors/error.service';
+import {Property} from '../property.model';
+import {CanComponentDeactivate} from '../../can-deactivate-guard.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
     selector: 'app-property-edit',
     templateUrl: './property-edit.component.html'
 })
-export class PropertyEditComponent implements OnInit {
+export class PropertyEditComponent implements OnInit, CanComponentDeactivate {
     id: string;
     editMode = false;
+    property: Property;
     propertyForm: FormGroup;
+    changesSaved = false;
 
     constructor(private propertyService: PropertyService,
                 private route: ActivatedRoute,
-                private router: Router) {}
+                private router: Router) {
+    }
 
     ngOnInit() {
         this.route.params.subscribe(
@@ -40,17 +45,17 @@ export class PropertyEditComponent implements OnInit {
         let zip = 0;
 
         if (this.editMode) {
-            const property = this.propertyService.getProperty(this.id);
-            name = property.name;
-            facilities = property.facilities;
-            imagePath = property.imagePath;
-            expectedPrice = property.expectedPrice;
-            area = property.area;
-            address1 = property.address1;
-            address2 = property.address2;
-            city = property.city;
-            state = property.state;
-            zip = property.zip;
+            this.property = this.propertyService.getProperty(this.id);
+            name = this.property.name;
+            facilities = this.property.facilities;
+            imagePath = this.property.imagePath;
+            expectedPrice = this.property.expectedPrice;
+            area = this.property.area;
+            address1 = this.property.address1;
+            address2 = this.property.address2;
+            city = this.property.city;
+            state = this.property.state;
+            zip = this.property.zip;
         }
 
         this.propertyForm = new FormGroup({
@@ -74,10 +79,30 @@ export class PropertyEditComponent implements OnInit {
             this.propertyService.addProperty(this.propertyForm.value).subscribe();
         }
 
+        this.changesSaved = true;
+
         this.router.navigate(['../'], {relativeTo: this.route});
     }
 
     onCancel() {
         this.router.navigate(['../'], {relativeTo: this.route});
+    }
+
+    canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+        if ((this.propertyForm.value.name !== this.property.name
+                || this.propertyForm.value.facilities !== this.property.facilities
+                || this.propertyForm.value.imagePath !== this.property.imagePath
+                || this.propertyForm.value.expectedPrice !== this.property.expectedPrice
+                || this.propertyForm.value.area !== this.property.area
+                || this.propertyForm.value.address1 !== this.property.address1
+                || this.propertyForm.value.address2 !== this.property.address2
+                || this.propertyForm.value.city !== this.property.city
+                || this.propertyForm.value.state !== this.property.state
+                || this.propertyForm.value.zip !== this.property.zip)
+            && !this.changesSaved) {
+            return confirm('Do you want to discard the changes?');
+        } else {
+            return true;
+        }
     }
 }

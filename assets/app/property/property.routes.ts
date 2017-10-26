@@ -2,6 +2,7 @@ import {Routes} from '@angular/router';
 import {PropertyStartComponent} from './property-start/property-start.component';
 import {PropertyDetailComponent} from './property-detail/property-detail.component';
 import {PropertyEditComponent} from './property-edit/property-edit.component';
+import {CanDeactivateGuard} from '../can-deactivate-guard.service';
 
 export const PROPERTY_ROUTES: Routes = [
     {
@@ -10,7 +11,8 @@ export const PROPERTY_ROUTES: Routes = [
     },
     {
         path: 'new',
-        component: PropertyEditComponent
+        component: PropertyEditComponent,
+        canDeactivate: [CanDeactivateGuard]
     },
     {
         path: ':id',
@@ -18,6 +20,7 @@ export const PROPERTY_ROUTES: Routes = [
     },
     {
         path: ':id/edit',
-        component: PropertyEditComponent
+        component: PropertyEditComponent,
+        canDeactivate: [CanDeactivateGuard]
     }
 ];
