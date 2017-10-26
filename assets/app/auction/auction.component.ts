@@ -29,11 +29,11 @@ export class AuctionComponent implements OnInit {
     save(auctionForm) {
 
         this.auction.status = 'PENDING';
-        this.auctionService.saveAuction(this.auction);
-        // this.http.post("http://localhost:3000/admin/auction", this.auction).subscribe(
-        //     (data) => {
-        //         console.log(data);
-        //     });
+       // this.auctionService.saveAuction(this.auction);
+        this.http.post("http://localhost:3000/admin/auction", this.auction).subscribe(
+            (data) => {
+                console.log(data);
+            });
         this.router.navigate(['/home']);
     }
 }
