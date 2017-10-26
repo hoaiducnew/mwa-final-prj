@@ -35,18 +35,31 @@ export class BidService {
             });
      }
 
-     getBids(){
-        return this.http.get('http://localhost:3000/bidapi/')
+     getBids(auction: Auction){
+        console.log("auction._id" +auction._id);
+        return this.http.get('http://localhost:3000/bidapi/' + auction._id)
         .map(data => {
             this.bids = data['obj'];
             return data['obj'];
         })
         .catch((error: Response) => {
             this.errorService.handleError(error.json());
-            return Observable.throw(error.json());
+            return Observable.throw(error);
         });
     
       }
 
+    // getBids(){
+    //     return this.http.get('http://localhost:3000/bidapi/')
+    //         .map(data => {
+    //             this.bids = data['obj'];
+    //             return data['obj'];
+    //         })
+    //         .catch((error: Response) => {
+    //             this.errorService.handleError(error.json());
+    //             return Observable.throw(error.json());
+    //         });
+    //
+    // }
       
 }

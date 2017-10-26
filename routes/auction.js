@@ -7,8 +7,6 @@ var Property = require('../models/property');
 var Auction = require('../models/auction');
 
 router.post('/', function (req, res, next) {
-
-
         var auction = new Auction({
             startTime: req.body.startTime,
             endTime: req.body.endTime,
@@ -62,7 +60,6 @@ router.put('/changeStatus', function (req, res, next) {
     });
 });
 
-
 router.get('/', function (req, res, next) {
     Auction.find().populate('property')
         .exec(function (err, auctions) {
@@ -77,6 +74,7 @@ router.get('/', function (req, res, next) {
             );
         });
 });
+
 // router.get('/:id', function (req, res, next) {
 //     var decoded = jwt.decode(req.header('token'));
 //     Auction.findById(req.params.id, function (err, auction) {

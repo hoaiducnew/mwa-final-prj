@@ -28,7 +28,7 @@ export class AuctionDetailComponent {
         }
       );
 
-      this.bidService.getBids().subscribe(
+      this.bidService.getBids(this.auction).subscribe(
         (bids: Bid[]) => {
             this.bids = bids;
         }

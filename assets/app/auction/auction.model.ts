@@ -11,4 +11,5 @@ export class Auction {
     bidCount: number = 0;
     currentHighestBidder: User;
     property: Property;
+    _id?: string;
 }

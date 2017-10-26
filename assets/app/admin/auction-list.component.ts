@@ -23,14 +23,13 @@ export class AuctionListComponent implements OnInit {
 
     approve(selectedAuction:Auction){
         selectedAuction.status="APPROVED";
+
         this.auctionService.statusUpdateAuction(selectedAuction);
-       // this.http.put("http://localhost:3000/admin/auction/changeStatus",selectedAuction).subscribe((data)=>console.log(data));
     }
 
     reject(selectedAuction:Auction){
         selectedAuction.status="REJECTED";
         this.auctionService.statusUpdateAuction(selectedAuction);
-        //this.http.put("http://localhost:3000/admin/auction/changeStatus",selectedAuction).subscribe((data)=>console.log(data));
     }
 
 }
