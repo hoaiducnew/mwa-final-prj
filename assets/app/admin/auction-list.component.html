@@ -3,7 +3,7 @@
 <table class="table">
     <tr>
         <th>Property Name</th>
-        <th>Owner Description</th>
+        <!-- <th>Owner Description</th> -->
         <th>Expected Price</th>
         <th>Start Date</th>
         <th>End Date</th>
@@ -14,7 +14,7 @@
         <td>
             <p *ngIf="auction.property!=null">{{auction.property.name}}</p>
         </td>
-        <td>{{auction.property.owner.email}}</td>
+        <!-- <td>{{auction.property.owner.email}}</td> -->
         <td>{{auction.property.expectedPrice}}</td>
         <td>{{auction.startTime | date:"medium" }}</td>
         <td>{{auction.endTime | date:"medium"}}</td>

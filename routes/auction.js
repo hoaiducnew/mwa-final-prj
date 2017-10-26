@@ -88,7 +88,7 @@ router.put('/addBid', function (req, res, next) {
     
 
 router.get('/', function (req, res, next) {
-    Auction.find().populate('property','owner')
+    Auction.find().populate('property')
         .exec(function (err, auctions) {
             if (err) {
                 return res.status(500).json({
