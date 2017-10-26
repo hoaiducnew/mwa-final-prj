@@ -18,10 +18,6 @@ export class PropertyService {
 
     getProperties() {
         var headers = new HttpHeaders().set('Content-Type', 'application/json');
-        // var headers = new HttpHeaders().set('token', localStorage.getItem('token'));
-        // headers.append('Content-Type', 'application/json');
-        // console.log(localStorage.getItem('token'));
-        // console.log(localStorage.getItem('token'));
         return this.http.get<Property[]>('http://localhost:3000/property', {headers: headers})
             .map(properties => this.properties = properties)
             .catch(error => {

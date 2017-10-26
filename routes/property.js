@@ -5,6 +5,19 @@ var jwt = require('jsonwebtoken');
 var User = require('../models/user');
 var Property = require('../models/property');
 
+router.use('/', function(req, res, next) {
+    var decoded = jwt.decode(req.header('token'));
+
+    if (!decoded.user) {
+        return res.status(401).json({
+            title: 'Not Authenticated',
+            error: err
+        });
+    }
+    console.log('username: ' + decoded.user.email);
+    next();
+});
+
 router.post('/', function (req, res, next) {
     var decoded = jwt.decode(req.header('token'));
     User.findById(decoded.user._id, function (err, user) {
