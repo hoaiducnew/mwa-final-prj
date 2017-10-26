@@ -69,6 +69,7 @@ router.put('/addBid', function (req, res, next) {
                 });
             }      
             auction.currentBid = req.body.currentBid;
+            auction.bidCount++;
             auction.save(function (err, result) {
                 if (err) {
                     return res.status(500).json({
@@ -87,7 +88,7 @@ router.put('/addBid', function (req, res, next) {
     
 
 router.get('/', function (req, res, next) {
-    Auction.find().populate('property')
+    Auction.find().populate('property','owner')
         .exec(function (err, auctions) {
             if (err) {
                 return res.status(500).json({

@@ -14,8 +14,7 @@
         <td>
             <p *ngIf="auction.property!=null">{{auction.property.name}}</p>
         </td>
-        <td></td>
-        <!-- <td>{{auction.owner.name}}</td> -->
+        <td>{{auction.property.owner.email}}</td>
         <td>{{auction.property.expectedPrice}}</td>
         <td>{{auction.startTime | date:"medium" }}</td>
         <td>{{auction.endTime | date:"medium"}}</td>
