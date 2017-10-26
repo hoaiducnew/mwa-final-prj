@@ -3,7 +3,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from './user.model';
 import {UserService} from './user.service';
 import {Router} from '@angular/router';
-import {ErrorService} from '../errors/error.service';
 
 @Component({
     selector: 'app-signin',
@@ -22,7 +21,7 @@ export class SigninComponent implements OnInit {
                 Validators.required,
                 Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
             ]),
-            password: new FormControl(null, Validators.required)
+            password: new FormControl(null, [Validators.required, Validators.minLength(6)])
         });
     }
 

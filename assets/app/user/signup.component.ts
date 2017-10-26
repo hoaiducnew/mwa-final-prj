@@ -9,6 +9,7 @@ import {User} from './user.model';
 })
 export class SignupComponent implements OnInit {
     signupForm: FormGroup;
+    commonPasswords = ['root', 'password', '123456'];
 
     constructor(private userService: UserService) {
     }
@@ -29,14 +30,21 @@ export class SignupComponent implements OnInit {
 
     ngOnInit() {
         this.signupForm = new FormGroup({
-            firstName: new FormControl(null, Validators.required),
-            lastName: new FormControl(null, Validators.required),
+            firstName: new FormControl(null, [Validators.required, Validators.minLength(4)]),
+            lastName: new FormControl(null, [Validators.required, Validators.minLength(4)]),
             email: new FormControl(null, [
                 Validators.required,
                 Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
             ]),
-            password: new FormControl(null, Validators.required),
+            password: new FormControl(null, [Validators.required, Validators.minLength(6), this.forbiddenPasswordValidator.bind(this)]),
             role: new FormControl('user', Validators.required)
         });
+    }
+
+    forbiddenPasswordValidator(control: FormControl): { [s: string]: boolean } {
+        if (this.commonPasswords.indexOf(control.value) !== -1) {
+            return {'passwordIsForbidden': true};
+        }
+        return null;
     }
 }
