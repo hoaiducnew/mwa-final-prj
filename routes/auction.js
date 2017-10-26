@@ -8,13 +8,13 @@ var Auction = require('../models/auction');
 
 router.post('/', function (req, res, next) {
     var decoded = jwt.decode(req.query.token);
-    // User.findById(decoded.user._id, function (err, user) {
-    //     if (err) {
-    //         return res.status(500).json({
-    //             title: 'An error occurred',
-    //             error: err
-    //         });
-    //     }
+    User.findById(decoded.user._id, function (err, user) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
 
         var auction = new Auction({
             startTime: req.body.startTime,
@@ -40,8 +40,36 @@ router.post('/', function (req, res, next) {
                 obj: result
             });
         });
-    // });
+    });
 });
+
+router.post('/changeStatus', function (req, res, next) {
+    var decoded = jwt.decode(req.header('token'));
+    console.log("test:"+req.body);
+    Auction.findById(req.params.id, function (err, auction) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }      
+        auction.status = req.body.status;
+        auction.save(function (err, result) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+
+            res.status(201).json({
+                message: 'auction ' + req.body.status,
+                obj: result
+            });
+        });
+    });
+});
+
 
 router.get('/', function (req, res, next) {
     Auction.find().populate('property')
@@ -57,9 +85,20 @@ router.get('/', function (req, res, next) {
             );
         });
 });
-
+router.get('/:id', function (req, res, next) {
+    var decoded = jwt.decode(req.header('token'));
+    Auction.findById(req.params.id, function (err, auction) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        res.status(200).json(auction);
+    });
+});
 router.get('/activeAuctions', function (req, res, next) {
-    Auction.findByStatus('Approved')
+    Auction.findByStatus('APPROVED')
         .exec(function (err, properties) {
             if (err) {
                 return res.status(500).json({
